@@ -7,22 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		135C032F29A0AE92005030B1 /* PhotoCarpetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135C032E29A0AE92005030B1 /* PhotoCarpetApp.swift */; };
-		135C033129A0AE92005030B1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135C033029A0AE92005030B1 /* ContentView.swift */; };
-		135C033329A0AE93005030B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 135C033229A0AE93005030B1 /* Assets.xcassets */; };
-		135C033629A0AE93005030B1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 135C033529A0AE93005030B1 /* Preview Assets.xcassets */; };
+		13E938F929A0D92400A6CA0B /* PhotoCarpetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E938F829A0D92400A6CA0B /* PhotoCarpetApp.swift */; };
+		13E938FB29A0D92400A6CA0B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E938FA29A0D92400A6CA0B /* ContentView.swift */; };
+		13E938FD29A0D92500A6CA0B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13E938FC29A0D92500A6CA0B /* Assets.xcassets */; };
+		13E9390029A0D92500A6CA0B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13E938FF29A0D92500A6CA0B /* Preview Assets.xcassets */; };
+		13FD22F829A0F2CB0055013E /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FD22F729A0F2CB0055013E /* Model.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		135C032B29A0AE92005030B1 /* PhotoCarpet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoCarpet.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		135C032E29A0AE92005030B1 /* PhotoCarpetApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCarpetApp.swift; sourceTree = "<group>"; };
-		135C033029A0AE92005030B1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		135C033229A0AE93005030B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		135C033529A0AE93005030B1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		13E938F529A0D92400A6CA0B /* PhotoCarpet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoCarpet.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13E938F829A0D92400A6CA0B /* PhotoCarpetApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCarpetApp.swift; sourceTree = "<group>"; };
+		13E938FA29A0D92400A6CA0B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		13E938FC29A0D92500A6CA0B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		13E938FF29A0D92500A6CA0B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		13FD22F729A0F2CB0055013E /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		135C032829A0AE92005030B1 /* Frameworks */ = {
+		13E938F229A0D92400A6CA0B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -32,51 +34,76 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		135C032229A0AE92005030B1 = {
+		13E938EC29A0D92400A6CA0B = {
 			isa = PBXGroup;
 			children = (
-				135C032D29A0AE92005030B1 /* PhotoCarpet */,
-				135C032C29A0AE92005030B1 /* Products */,
+				13E938F729A0D92400A6CA0B /* PhotoCarpet */,
+				13E938F629A0D92400A6CA0B /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		135C032C29A0AE92005030B1 /* Products */ = {
+		13E938F629A0D92400A6CA0B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				135C032B29A0AE92005030B1 /* PhotoCarpet.app */,
+				13E938F529A0D92400A6CA0B /* PhotoCarpet.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		135C032D29A0AE92005030B1 /* PhotoCarpet */ = {
+		13E938F729A0D92400A6CA0B /* PhotoCarpet */ = {
 			isa = PBXGroup;
 			children = (
-				135C032E29A0AE92005030B1 /* PhotoCarpetApp.swift */,
-				135C033029A0AE92005030B1 /* ContentView.swift */,
-				135C033229A0AE93005030B1 /* Assets.xcassets */,
-				135C033429A0AE93005030B1 /* Preview Content */,
+				13E938F829A0D92400A6CA0B /* PhotoCarpetApp.swift */,
+				13FD22F529A0F2AC0055013E /* Views */,
+				13FD22F629A0F2BC0055013E /* Model */,
+				13FD22F929A0F2D00055013E /* Resources */,
+				13E938FE29A0D92500A6CA0B /* Preview Content */,
 			);
 			path = PhotoCarpet;
 			sourceTree = "<group>";
 		};
-		135C033429A0AE93005030B1 /* Preview Content */ = {
+		13E938FE29A0D92500A6CA0B /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				135C033529A0AE93005030B1 /* Preview Assets.xcassets */,
+				13E938FF29A0D92500A6CA0B /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		13FD22F529A0F2AC0055013E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				13E938FA29A0D92400A6CA0B /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		13FD22F629A0F2BC0055013E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				13FD22F729A0F2CB0055013E /* Model.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		13FD22F929A0F2D00055013E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				13E938FC29A0D92500A6CA0B /* Assets.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		135C032A29A0AE92005030B1 /* PhotoCarpet */ = {
+		13E938F429A0D92400A6CA0B /* PhotoCarpet */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 135C033929A0AE93005030B1 /* Build configuration list for PBXNativeTarget "PhotoCarpet" */;
+			buildConfigurationList = 13E9390329A0D92500A6CA0B /* Build configuration list for PBXNativeTarget "PhotoCarpet" */;
 			buildPhases = (
-				135C032729A0AE92005030B1 /* Sources */,
-				135C032829A0AE92005030B1 /* Frameworks */,
-				135C032929A0AE92005030B1 /* Resources */,
+				13E938F129A0D92400A6CA0B /* Sources */,
+				13E938F229A0D92400A6CA0B /* Frameworks */,
+				13E938F329A0D92400A6CA0B /* Resources */,
 			);
 			buildRules = (
 			);
@@ -84,25 +111,25 @@
 			);
 			name = PhotoCarpet;
 			productName = PhotoCarpet;
-			productReference = 135C032B29A0AE92005030B1 /* PhotoCarpet.app */;
+			productReference = 13E938F529A0D92400A6CA0B /* PhotoCarpet.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		135C032329A0AE92005030B1 /* Project object */ = {
+		13E938ED29A0D92400A6CA0B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
-					135C032A29A0AE92005030B1 = {
+					13E938F429A0D92400A6CA0B = {
 						CreatedOnToolsVersion = 14.2;
 					};
 				};
 			};
-			buildConfigurationList = 135C032629A0AE92005030B1 /* Build configuration list for PBXProject "PhotoCarpet" */;
+			buildConfigurationList = 13E938F029A0D92400A6CA0B /* Build configuration list for PBXProject "PhotoCarpet" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -110,42 +137,43 @@
 				en,
 				Base,
 			);
-			mainGroup = 135C032229A0AE92005030B1;
-			productRefGroup = 135C032C29A0AE92005030B1 /* Products */;
+			mainGroup = 13E938EC29A0D92400A6CA0B;
+			productRefGroup = 13E938F629A0D92400A6CA0B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				135C032A29A0AE92005030B1 /* PhotoCarpet */,
+				13E938F429A0D92400A6CA0B /* PhotoCarpet */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		135C032929A0AE92005030B1 /* Resources */ = {
+		13E938F329A0D92400A6CA0B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				135C033629A0AE93005030B1 /* Preview Assets.xcassets in Resources */,
-				135C033329A0AE93005030B1 /* Assets.xcassets in Resources */,
+				13E9390029A0D92500A6CA0B /* Preview Assets.xcassets in Resources */,
+				13E938FD29A0D92500A6CA0B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		135C032729A0AE92005030B1 /* Sources */ = {
+		13E938F129A0D92400A6CA0B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				135C033129A0AE92005030B1 /* ContentView.swift in Sources */,
-				135C032F29A0AE92005030B1 /* PhotoCarpetApp.swift in Sources */,
+				13FD22F829A0F2CB0055013E /* Model.swift in Sources */,
+				13E938FB29A0D92400A6CA0B /* ContentView.swift in Sources */,
+				13E938F929A0D92400A6CA0B /* PhotoCarpetApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		135C033729A0AE93005030B1 /* Debug */ = {
+		13E9390129A0D92500A6CA0B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -205,7 +233,7 @@
 			};
 			name = Debug;
 		};
-		135C033829A0AE93005030B1 /* Release */ = {
+		13E9390229A0D92500A6CA0B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -259,7 +287,7 @@
 			};
 			name = Release;
 		};
-		135C033A29A0AE93005030B1 /* Debug */ = {
+		13E9390429A0D92500A6CA0B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -287,7 +315,7 @@
 			};
 			name = Debug;
 		};
-		135C033B29A0AE93005030B1 /* Release */ = {
+		13E9390529A0D92500A6CA0B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -318,25 +346,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		135C032629A0AE92005030B1 /* Build configuration list for PBXProject "PhotoCarpet" */ = {
+		13E938F029A0D92400A6CA0B /* Build configuration list for PBXProject "PhotoCarpet" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				135C033729A0AE93005030B1 /* Debug */,
-				135C033829A0AE93005030B1 /* Release */,
+				13E9390129A0D92500A6CA0B /* Debug */,
+				13E9390229A0D92500A6CA0B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		135C033929A0AE93005030B1 /* Build configuration list for PBXNativeTarget "PhotoCarpet" */ = {
+		13E9390329A0D92500A6CA0B /* Build configuration list for PBXNativeTarget "PhotoCarpet" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				135C033A29A0AE93005030B1 /* Debug */,
-				135C033B29A0AE93005030B1 /* Release */,
+				13E9390429A0D92500A6CA0B /* Debug */,
+				13E9390529A0D92500A6CA0B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 135C032329A0AE92005030B1 /* Project object */;
+	rootObject = 13E938ED29A0D92400A6CA0B /* Project object */;
 }
