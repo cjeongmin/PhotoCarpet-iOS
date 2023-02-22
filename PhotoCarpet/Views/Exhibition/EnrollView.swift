@@ -24,7 +24,7 @@ struct EnrollView: View {
             ZStack(alignment: .topLeading) {
                 Color.clear
                 VStack(alignment: .leading) {
-
+                    
                     VStack(alignment: .leading) {
                         Text("작품 선택")
                             .font(.system(size: 22))
@@ -60,15 +60,35 @@ struct EnrollView: View {
                     
                     Spacer()
                     
-                    NavigationLink {
-                        ExhibitionMainView(
-                            thumbnail: $selectedImage1,
-                            exhibitionTitle: $exhibitionTitle,
-                            exhibitionDetail: $exhibitionDetail,
-                            hashTags: .constant(makeTags(raw: hashTags)),
-                            date: $date
-                        )
-                    } label: {
+                    if (!exhibitionTitle.isEmpty &&
+                        !exhibitionDetail.isEmpty &&
+                        makeTags(raw: hashTags).count > 0 &&
+                        selectedImage1 != nil &&
+                        selectedImage2 != nil &&
+                        selectedImage3 != nil &&
+                        selectedImage4 != nil
+                    ) {
+                        NavigationLink {
+                            ExhibitionMainView(
+                                thumbnail: $selectedImage1,
+                                exhibitionTitle: $exhibitionTitle,
+                                exhibitionDetail: $exhibitionDetail,
+                                hashTags: .constant(makeTags(raw: hashTags)),
+                                date: $date
+                            )
+                        } label: {
+                            Group {
+                                Text("전시회 등록하기")
+                                    .frame(maxWidth: .infinity, alignment: .center)
+                                    .font(.system(size: 18).bold())
+                                    .foregroundColor(.white)
+                            }
+                            .frame(maxWidth: .infinity, minHeight: 60)
+                            .background(Color(.black))
+                            .cornerRadius(10)
+                            .padding(.trailing, 28)
+                        }
+                    } else {
                         Group {
                             Text("전시회 등록하기")
                                 .frame(maxWidth: .infinity, alignment: .center)
@@ -76,7 +96,7 @@ struct EnrollView: View {
                                 .foregroundColor(.white)
                         }
                         .frame(maxWidth: .infinity, minHeight: 60)
-                        .background(.black)
+                        .background(Color(0x000000, opacity: 0.5))
                         .cornerRadius(10)
                         .padding(.trailing, 28)
                     }
