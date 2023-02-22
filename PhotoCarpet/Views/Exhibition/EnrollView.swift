@@ -9,15 +9,7 @@ import SwiftUI
 
 struct EnrollView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @State private var exhibitionTitle: String = ""
-    @State private var exhibitionDetail: String = ""
-    @State private var hashTags: String = ""
-    @State private var date: Date = Date()
-    
-    @State private var selectedImage1: Image?
-    @State private var selectedImage2: Image?
-    @State private var selectedImage3: Image?
-    @State private var selectedImage4: Image?
+    @EnvironmentObject var exhibitionData: ExhibitionData
     
     var body: some View {
         NavigationStack {
@@ -36,23 +28,23 @@ struct EnrollView: View {
                     
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 12) {
-                            ImageSelector() { image in selectedImage1 = image }
-                            ImageSelector() { image in selectedImage2 = image }
-                            ImageSelector() { image in selectedImage3 = image }
-                            ImageSelector() { image in selectedImage4 = image }
+                            ImageSelector(selectedImage: $exhibitionData.photo1)
+                            ImageSelector(selectedImage: $exhibitionData.photo2)
+                            ImageSelector(selectedImage: $exhibitionData.photo3)
+                            ImageSelector(selectedImage: $exhibitionData.photo4)
                         }
                     }
                     
-                    CustomTextField(title: "전시회 제목", placeholder: "전시회 제목을 입력해주세요", text: $exhibitionTitle)
+                    CustomTextField(title: "전시회 제목", placeholder: "전시회 제목을 입력해주세요", text: $exhibitionData.title)
                     
-                    CustomTextField(title: "간단한 설명", placeholder: "설명을 입력해주세요", text: $exhibitionDetail)
+                    CustomTextField(title: "간단한 설명", placeholder: "설명을 입력해주세요", text: $exhibitionData.description)
                     
-                    CustomTextField(title: "해시태그", placeholder: "태그를 입력해주세요", text: $hashTags)
+                    CustomTextField(title: "해시태그", placeholder: "태그를 입력해주세요", text: $exhibitionData.rawHashTags)
                     
                     VStack(alignment: .leading) {
                         Text("전시회 마감일")
                         VStack {
-                            DatePicker("", selection: $date)
+                            DatePicker("", selection: $exhibitionData.date)
                                 .datePickerStyle(.compact)
                                 .labelsHidden()
                         }
@@ -60,25 +52,16 @@ struct EnrollView: View {
                     
                     Spacer()
                     
-                    if (!exhibitionTitle.isEmpty &&
-                        !exhibitionDetail.isEmpty &&
-                        makeTags(raw: hashTags).count > 0 &&
-                        selectedImage1 != nil &&
-                        selectedImage2 != nil &&
-                        selectedImage3 != nil &&
-                        selectedImage4 != nil
+                    if (!exhibitionData.title.isEmpty &&
+                        !exhibitionData.description.isEmpty &&
+                        exhibitionData.hashTags.count > 0 &&
+                        exhibitionData.photo1 != nil &&
+                        exhibitionData.photo2 != nil &&
+                        exhibitionData.photo3 != nil &&
+                        exhibitionData.photo4 != nil
                     ) {
                         NavigationLink {
-                            ExhibitionMainView(
-                                photo1: $selectedImage1,
-                                photo2: $selectedImage2,
-                                photo3: $selectedImage3,
-                                photo4: $selectedImage4,
-                                exhibitionTitle: $exhibitionTitle,
-                                exhibitionDetail: $exhibitionDetail,
-                                hashTags: .constant(makeTags(raw: hashTags)),
-                                date: $date
-                            )
+                            ExhibitionMainView()
                         } label: {
                             Group {
                                 Text("전시회 등록하기")
@@ -111,27 +94,19 @@ struct EnrollView: View {
                 ToolbarItemGroup(placement: .navigationBarLeading) {
                     BackButton {
                         presentationMode.wrappedValue.dismiss()
+                        exhibitionData.clear()
                     }
                 }
             }
             .navigationBarBackButtonHidden(true)
         }
     }
-    
-    func makeTags(raw: String) -> [String] {
-        var hashTags: [String] = []
-        for tag in raw.components(separatedBy: " ") {
-            if !tag.hasPrefix("#") { continue }
-            if tag[tag.index(tag.startIndex, offsetBy: 1) ..< tag.endIndex].isEmpty { continue }
-            hashTags.append(tag)
-        }
-        return hashTags
-    }
 }
 
 struct EnrollView_Previews: PreviewProvider {
     static var previews: some View {
         EnrollView()
+            .environmentObject(ExhibitionData())
     }
 }
 

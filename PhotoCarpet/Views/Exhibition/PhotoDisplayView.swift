@@ -9,26 +9,22 @@ import SwiftUI
 
 struct PhotoDisplayView: View {
     @Environment(\.dismiss) var dismissAction
-    
-    @Binding var photo1: Image?
-    @Binding var photo2: Image?
-    @Binding var photo3: Image?
-    @Binding var photo4: Image?
+    @EnvironmentObject var exhibitionData: ExhibitionData
     
     var body: some View {
         NavigationStack {
             ZStack {
                 TabView {
-                    if let photo = $photo1.wrappedValue {
+                    if let photo = $exhibitionData.photo1.wrappedValue {
                         PhotoPageView(photo: .constant(photo))
                     }
-                    if let photo = $photo2.wrappedValue {
+                    if let photo = $exhibitionData.photo2.wrappedValue {
                         PhotoPageView(photo: .constant(photo))
                     }
-                    if let photo = $photo3.wrappedValue {
+                    if let photo = $exhibitionData.photo3.wrappedValue {
                         PhotoPageView(photo: .constant(photo))
                     }
-                    if let photo = $photo4.wrappedValue {
+                    if let photo = $exhibitionData.photo4.wrappedValue {
                         PhotoPageView(photo: .constant(photo))
                     }
                 }
@@ -72,11 +68,7 @@ struct PhotoPageView: View {
 
 struct PhotoDisplayView_Previews: PreviewProvider {
     static var previews: some View {
-        PhotoDisplayView(
-            photo1: .constant(Image("example")),
-            photo2: .constant(Image("example")),
-            photo3: .constant(Image("example")),
-            photo4: .constant(Image("example"))
-        )
+        PhotoDisplayView()
+            .environmentObject(ExhibitionData())
     }
 }

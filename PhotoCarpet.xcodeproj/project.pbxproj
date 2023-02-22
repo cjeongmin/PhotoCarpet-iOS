@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		133DE2E429A60D8900AFAD29 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133DE2E329A60D8900AFAD29 /* Tag.swift */; };
 		133DE2E729A61C2C00AFAD29 /* PhotoDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133DE2E629A61C2C00AFAD29 /* PhotoDisplayView.swift */; };
+		133DE2EB29A673C700AFAD29 /* ExhibitionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133DE2EA29A673C700AFAD29 /* ExhibitionData.swift */; };
 		1344F1C229A5EB8300FD3FA3 /* ExhibitionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1344F1C129A5EB8300FD3FA3 /* ExhibitionDetailView.swift */; };
 		13E938F929A0D92400A6CA0B /* PhotoCarpetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E938F829A0D92400A6CA0B /* PhotoCarpetApp.swift */; };
 		13E938FB29A0D92400A6CA0B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E938FA29A0D92400A6CA0B /* ContentView.swift */; };
@@ -25,6 +26,7 @@
 /* Begin PBXFileReference section */
 		133DE2E329A60D8900AFAD29 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		133DE2E629A61C2C00AFAD29 /* PhotoDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDisplayView.swift; sourceTree = "<group>"; };
+		133DE2EA29A673C700AFAD29 /* ExhibitionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExhibitionData.swift; sourceTree = "<group>"; };
 		1344F1C129A5EB8300FD3FA3 /* ExhibitionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExhibitionDetailView.swift; sourceTree = "<group>"; };
 		13E938F529A0D92400A6CA0B /* PhotoCarpet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoCarpet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13E938F829A0D92400A6CA0B /* PhotoCarpetApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCarpetApp.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				13FD22F729A0F2CB0055013E /* Model.swift */,
+				133DE2EA29A673C700AFAD29 /* ExhibitionData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -204,6 +207,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				133DE2EB29A673C700AFAD29 /* ExhibitionData.swift in Sources */,
 				13EBBA2B29A5D5E50079CC52 /* BackButton.swift in Sources */,
 				13FD22F829A0F2CB0055013E /* Model.swift in Sources */,
 				133DE2E429A60D8900AFAD29 /* Tag.swift in Sources */,

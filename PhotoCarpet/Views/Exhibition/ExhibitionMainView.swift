@@ -9,15 +9,7 @@ import SwiftUI
 
 struct ExhibitionMainView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @Binding var photo1: Image?
-    @Binding var photo2: Image?
-    @Binding var photo3: Image?
-    @Binding var photo4: Image?
-    
-    @Binding var exhibitionTitle: String
-    @Binding var exhibitionDetail: String
-    @Binding var hashTags: [String]
-    @Binding var date: Date
+    @EnvironmentObject var exhibitionData: ExhibitionData
     
     @State var showDetail: Bool = false
     
@@ -33,7 +25,7 @@ struct ExhibitionMainView: View {
                     
                     Group {
                         Group {
-                            Text(exhibitionTitle)
+                            Text(exhibitionData.title)
                                 .lineLimit(1...4)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .font(.system(size: 42, weight: .black))
@@ -46,12 +38,7 @@ struct ExhibitionMainView: View {
                         .padding()
                         
                         NavigationLink {
-                            PhotoDisplayView(
-                                photo1: $photo1,
-                                photo2: $photo2,
-                                photo3: $photo3,
-                                photo4: $photo4
-                            )
+                            PhotoDisplayView()
                         } label: {
                             Group {
                                 Text("관람하기")
@@ -80,20 +67,15 @@ struct ExhibitionMainView: View {
                         .foregroundColor(.white)
                     }
                     .sheet(isPresented: $showDetail) {
-                        ExhibitionDetailView(
-                            exhibitionTitle: $exhibitionTitle,
-                            hashTags: $hashTags,
-                            exhibitionDetail: $exhibitionDetail,
-                            date: $date
-                        )
+                        ExhibitionDetailView()
                     }
                 }
                 .frame(maxWidth: .infinity)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(content: {
-                if let photo1 {
-                    photo1
+                if let photo = exhibitionData.photo1 {
+                    photo
                         .resizable()
                         .renderingMode(.original)
                         .edgesIgnoringSafeArea(.all)
@@ -139,15 +121,7 @@ struct ExhibitionMainView: View {
 
 struct ExhibitionMainView_Previews: PreviewProvider {
     static var previews: some View {
-        ExhibitionMainView(
-            photo1: .constant(Image("example")),
-            photo2: .constant(nil),
-            photo3: .constant(nil),
-            photo4: .constant(nil),
-            exhibitionTitle: .constant("전시회 제목"),
-            exhibitionDetail: .constant("전시회 설명"),
-            hashTags: .constant([]),
-            date: .constant(Date())
-        )
+        ExhibitionMainView()
+            .environmentObject(ExhibitionData())
     }
 }

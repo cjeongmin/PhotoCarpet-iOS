@@ -9,10 +9,8 @@ import SwiftUI
 import PhotosUI
 
 struct ImageSelector: View {
-    var action: (Image?) -> Void
-    
     @State private var selectedItem: PhotosPickerItem?
-    @State private var selectedImage: Image?
+    @Binding var selectedImage: Image?
     
     var body: some View {
         ZStack {
@@ -41,7 +39,6 @@ struct ImageSelector: View {
                     if let data = try? await newItem?.loadTransferable(type: Data.self) {
                         if let uiImage = UIImage(data: data) {
                             selectedImage = Image(uiImage: uiImage)
-                            action(selectedImage)
                             return
                         }
                     }
@@ -54,6 +51,6 @@ struct ImageSelector: View {
 
 struct ImageSelector_Previews: PreviewProvider {
     static var previews: some View {
-        ImageSelector() { _ in }
+        ImageSelector(selectedImage: .constant(nil))
     }
 }

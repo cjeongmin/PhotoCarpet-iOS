@@ -9,26 +9,16 @@ import SwiftUI
 
 struct ExhibitionDetailView: View {
     @Environment(\.dismiss) var dismissAction
-    
-    @Binding var exhibitionTitle: String
+    @EnvironmentObject var exhibitionData: ExhibitionData
 //    @Binding var profileImage: Image?
 //    @Binding var userName: String
-    @Binding var hashTags: [String]
-    @Binding var exhibitionDetail: String
-    @Binding var date: Date
     
     @State var isLiked: Bool = false
-    
-    private let dateFormatter: DateFormatter = {
-        let formatter: DateFormatter = DateFormatter()
-        formatter.dateFormat = "yy.MM.dd"
-        return formatter
-    }()
     
     var body: some View {
         VStack(alignment: .leading) {
             HStack(alignment: .center) {
-                Text(exhibitionTitle)
+                Text(exhibitionData.title)
                     .font(.system(size: 35, weight: .bold))
                     .frame(maxWidth: .infinity,alignment: .leading)
                 Spacer()
@@ -51,18 +41,18 @@ struct ExhibitionDetailView: View {
             }
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 5) {
-                    ForEach($hashTags, id: \.self) { tag in
+                    ForEach(Binding.constant(exhibitionData.hashTags), id: \.self) { tag in
                         Tag(tag: tag)
                     }
                 }
             }.padding([.top, .bottom], 20)
-            Text(exhibitionDetail)
+            Text(exhibitionData.description)
                 .padding([.leading, .trailing], 10)
             Spacer()
             HStack(alignment: .lastTextBaseline) {
                 Spacer()
                 Text("전시회 마감일")
-                Text(dateFormatter.string(from: date))
+                Text(exhibitionData.dateToString)
                     .font(.system(size: 27, weight: .bold))
             }
         }
@@ -73,11 +63,7 @@ struct ExhibitionDetailView: View {
 
 struct ExhibitionDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        ExhibitionDetailView(
-            exhibitionTitle: .constant("전시회 제목"),
-            hashTags: .constant(["#Tag1", "#Tag2", "#Tag3"]),
-            exhibitionDetail: .constant("전시회 정보입니다."),
-            date: .constant(Date())
-        )
+        ExhibitionDetailView()
+            .environmentObject(ExhibitionData())
     }
 }
