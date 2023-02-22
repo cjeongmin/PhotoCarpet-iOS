@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct ContentView: View {    
+struct ContentView: View {
     var body: some View {
         NavigationStack {
             NavigationLink {
-                EnrollView()
+                EnrollView(isEdit: .constant(false))
             } label: {
                 Text("GO")
             }

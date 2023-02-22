@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct ExhibitionMainView: View {
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @Environment(\.dismiss) var dismissAction
     @EnvironmentObject var exhibitionData: ExhibitionData
-    
     @State var showDetail: Bool = false
     
     var body: some View {
@@ -87,7 +86,7 @@ struct ExhibitionMainView: View {
                 ToolbarItem(placement: .navigationBarLeading) {
                     ZStack {
                         BackButton {
-                            presentationMode.wrappedValue.dismiss()
+                            dismissAction.callAsFunction()
                         }
                         
                         Circle()
@@ -98,8 +97,8 @@ struct ExhibitionMainView: View {
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        presentationMode.wrappedValue.dismiss()
+                    NavigationLink {
+                        EnrollView(isEdit: .constant(true))
                     } label: {
                         ZStack {
                             Image(systemName: "square.and.pencil")

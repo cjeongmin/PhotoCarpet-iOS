@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct EnrollView: View {
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @Environment(\.dismiss) var dismissAction
     @EnvironmentObject var exhibitionData: ExhibitionData
+    @Binding var isEdit: Bool
     
     var body: some View {
         NavigationStack {
@@ -60,23 +61,40 @@ struct EnrollView: View {
                         exhibitionData.photo3 != nil &&
                         exhibitionData.photo4 != nil
                     ) {
-                        NavigationLink {
-                            ExhibitionMainView()
-                        } label: {
-                            Group {
-                                Text("전시회 등록하기")
-                                    .frame(maxWidth: .infinity, alignment: .center)
-                                    .font(.system(size: 18).bold())
-                                    .foregroundColor(.white)
+                        if !isEdit {
+                            NavigationLink {
+                                ExhibitionMainView()
+                            } label: {
+                                Group {
+                                    Text("전시회 \(isEdit ? "수정" : "등록")하기")
+                                        .frame(maxWidth: .infinity, alignment: .center)
+                                        .font(.system(size: 18).bold())
+                                        .foregroundColor(.white)
+                                }
+                                .frame(maxWidth: .infinity, minHeight: 60)
+                                .background(Color(.black))
+                                .cornerRadius(10)
+                                .padding(.trailing, 28)
                             }
-                            .frame(maxWidth: .infinity, minHeight: 60)
-                            .background(Color(.black))
-                            .cornerRadius(10)
-                            .padding(.trailing, 28)
+                        } else {
+                            Button {
+                                dismissAction.callAsFunction()
+                            } label: {
+                                Group {
+                                    Text("전시회 \(isEdit ? "수정" : "등록")하기")
+                                        .frame(maxWidth: .infinity, alignment: .center)
+                                        .font(.system(size: 18).bold())
+                                        .foregroundColor(.white)
+                                }
+                                .frame(maxWidth: .infinity, minHeight: 60)
+                                .background(Color(.black))
+                                .cornerRadius(10)
+                                .padding(.trailing, 28)
+                            }
                         }
                     } else {
                         Group {
-                            Text("전시회 등록하기")
+                            Text("전시회 \(isEdit ? "수정" : "등록")하기")
                                 .frame(maxWidth: .infinity, alignment: .center)
                                 .font(.system(size: 18).bold())
                                 .foregroundColor(.white)
@@ -93,8 +111,10 @@ struct EnrollView: View {
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarLeading) {
                     BackButton {
-                        presentationMode.wrappedValue.dismiss()
-                        exhibitionData.clear()
+                        dismissAction.callAsFunction()
+                        if !isEdit {
+                            exhibitionData.clear()
+                        }
                     }
                 }
             }
@@ -105,8 +125,9 @@ struct EnrollView: View {
 
 struct EnrollView_Previews: PreviewProvider {
     static var previews: some View {
-        EnrollView()
-            .environmentObject(ExhibitionData())
+        EnrollView(
+            isEdit: .constant(false)
+        ).environmentObject(ExhibitionData())
     }
 }
 
