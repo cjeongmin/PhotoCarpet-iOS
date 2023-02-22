@@ -9,7 +9,11 @@ import SwiftUI
 
 struct ExhibitionMainView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @Binding var thumbnail: Image?
+    @Binding var photo1: Image?
+    @Binding var photo2: Image?
+    @Binding var photo3: Image?
+    @Binding var photo4: Image?
+    
     @Binding var exhibitionTitle: String
     @Binding var exhibitionDetail: String
     @Binding var hashTags: [String]
@@ -42,7 +46,12 @@ struct ExhibitionMainView: View {
                         .padding()
                         
                         NavigationLink {
-                            PhotoDisplayView()
+                            PhotoDisplayView(
+                                photo1: $photo1,
+                                photo2: $photo2,
+                                photo3: $photo3,
+                                photo4: $photo4
+                            )
                         } label: {
                             Group {
                                 Text("관람하기")
@@ -83,8 +92,8 @@ struct ExhibitionMainView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(content: {
-                if let thumbnail {
-                    thumbnail
+                if let photo1 {
+                    photo1
                         .resizable()
                         .renderingMode(.original)
                         .edgesIgnoringSafeArea(.all)
@@ -123,7 +132,7 @@ struct ExhibitionMainView: View {
                     }
                 }
             }
-        .navigationBarBackButtonHidden(true)
+            .navigationBarBackButtonHidden(true)
         }
     }
 }
@@ -131,7 +140,10 @@ struct ExhibitionMainView: View {
 struct ExhibitionMainView_Previews: PreviewProvider {
     static var previews: some View {
         ExhibitionMainView(
-            thumbnail: .constant(Image("example")),
+            photo1: .constant(Image("example")),
+            photo2: .constant(nil),
+            photo3: .constant(nil),
+            photo4: .constant(nil),
             exhibitionTitle: .constant("전시회 제목"),
             exhibitionDetail: .constant("전시회 설명"),
             hashTags: .constant([]),

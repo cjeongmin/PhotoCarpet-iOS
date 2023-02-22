@@ -45,9 +45,9 @@ struct EnrollView: View {
                     
                     CustomTextField(title: "전시회 제목", placeholder: "전시회 제목을 입력해주세요", text: $exhibitionTitle)
                     
-                    CustomTextField(title: "간단한 설명", placeholder: "", text: $exhibitionDetail)
+                    CustomTextField(title: "간단한 설명", placeholder: "설명을 입력해주세요", text: $exhibitionDetail)
                     
-                    CustomTextField(title: "해시태그", placeholder: "", text: $hashTags)
+                    CustomTextField(title: "해시태그", placeholder: "태그를 입력해주세요", text: $hashTags)
                     
                     VStack(alignment: .leading) {
                         Text("전시회 마감일")
@@ -70,7 +70,10 @@ struct EnrollView: View {
                     ) {
                         NavigationLink {
                             ExhibitionMainView(
-                                thumbnail: $selectedImage1,
+                                photo1: $selectedImage1,
+                                photo2: $selectedImage2,
+                                photo3: $selectedImage3,
+                                photo4: $selectedImage4,
                                 exhibitionTitle: $exhibitionTitle,
                                 exhibitionDetail: $exhibitionDetail,
                                 hashTags: .constant(makeTags(raw: hashTags)),
@@ -119,6 +122,7 @@ struct EnrollView: View {
         var hashTags: [String] = []
         for tag in raw.components(separatedBy: " ") {
             if !tag.hasPrefix("#") { continue }
+            if tag[tag.index(tag.startIndex, offsetBy: 1) ..< tag.endIndex].isEmpty { continue }
             hashTags.append(tag)
         }
         return hashTags

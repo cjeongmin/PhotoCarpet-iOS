@@ -11,13 +11,12 @@ struct Tag: View {
     @Binding var tag: String
     
     var body: some View {
-        Group {
             Text(tag)
                 .bold()
-        }
-        .frame(width: 90, height: 40)
-        .background(Color(0xF2F2F2))
-        .cornerRadius(100)
+                .frame(minWidth: 40)
+                .padding()
+                .background(Color(0xF2F2F2))
+                .cornerRadius(100)
     }
 }
 
