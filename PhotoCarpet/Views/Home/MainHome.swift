@@ -30,14 +30,12 @@ struct MainHome: View {
                             .foregroundColor(.black)
                     }
                 } // VStack
-                .padding(.top, 10)
+                .padding(.top, 20)
                 .background(.white)
                 .cornerRadius(20, corners: [.topLeft, .topRight])
                 .frame(maxHeight: .infinity)
             }
             .toolbar(.hidden, for: .navigationBar)
-            .toolbarBackground(.visible, for: .navigationBar)
-            .toolbarColorScheme(.dark, for: .navigationBar)
             .background(Gradient(colors: [.black, .white]))
         } // NavView
     }

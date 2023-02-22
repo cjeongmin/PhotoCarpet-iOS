@@ -15,7 +15,7 @@ struct ArtistItem: View {
     }
 
     var body: some View {
-        HStack(alignment: .top, spacing: 5) {
+        HStack(alignment: .top, spacing: 10) {
             Image("artist")
                 .renderingMode(.original)
                 .resizable()
@@ -25,19 +25,19 @@ struct ArtistItem: View {
 
             VStack(alignment: .leading, spacing: 5) {
                 Text("아티스트 이름")
-                    .font(.system(size: 16, weight: .semibold))
+                    .font(.system(size: 14, weight: .semibold))
                 Text(profileMessage)
-                    .font(.system(size: 14, weight: .light))
+                    .font(.system(size: 13, weight: .ultraLight))
             }
             .padding(.top, 20)
         }
         .frame(minWidth: 290, maxWidth: 290, minHeight: 90, maxHeight: 90, alignment: .leading)
         .padding(.horizontal, 20)
         .background(.white)
-        .cornerRadius(40)
+        .cornerRadius(30)
         .shadow(
-            color: Color.gray.opacity(0.5),
-            radius: 8,
+            color: Color.gray.opacity(0.3),
+            radius: 5,
             x: 0, y: 0
         )
     }

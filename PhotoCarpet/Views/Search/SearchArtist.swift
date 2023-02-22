@@ -14,7 +14,11 @@ struct SearchArtist: View {
         ScrollView {
             LazyVGrid(columns: columns, spacing: 20) {
                 ForEach(0 ... 19, id: \.self) { index in
-                    ArtistItem(profileMessage: String(repeating: "프로필 메세지", count: index))
+                    NavigationLink {
+                        Text("정환이형 프로필 관리 페이지")
+                    } label: {
+                        ArtistItem(profileMessage: String(repeating: "프로필 메세지", count: index))
+                    }
                 }
             }
             .padding(.top, 15)

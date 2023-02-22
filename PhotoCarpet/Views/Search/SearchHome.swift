@@ -11,7 +11,7 @@ struct SearchHome: View {
     @Environment(\.presentationMode) var presentation
 
     @State var searchWord: String = ""
-    @State var isExActive: Bool = true // 전시회 검색인지 확인
+    @State var isExActive: Bool = false // 전시회 검색인지 확인
 
     var body: some View {
         VStack(alignment: .center, spacing: 40) {
