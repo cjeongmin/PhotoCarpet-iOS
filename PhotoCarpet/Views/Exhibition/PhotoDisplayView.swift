@@ -12,44 +12,42 @@ struct PhotoDisplayView: View {
     @EnvironmentObject var exhibitionData: ExhibitionData
     
     var body: some View {
-        NavigationStack {
-            ZStack {
-                TabView {
-                    if let photo = $exhibitionData.photo1.wrappedValue {
-                        PhotoPageView(photo: .constant(photo))
-                    }
-                    if let photo = $exhibitionData.photo2.wrappedValue {
-                        PhotoPageView(photo: .constant(photo))
-                    }
-                    if let photo = $exhibitionData.photo3.wrappedValue {
-                        PhotoPageView(photo: .constant(photo))
-                    }
-                    if let photo = $exhibitionData.photo4.wrappedValue {
-                        PhotoPageView(photo: .constant(photo))
-                    }
+        ZStack {
+            TabView {
+                if let photo = $exhibitionData.photo1.wrappedValue {
+                    PhotoPageView(photo: .constant(photo))
                 }
-                .tabViewStyle(PageTabViewStyle())
-            }
-            .background(.black)
-            .edgesIgnoringSafeArea(.all)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    ZStack {
-                        BackButton {
-                            dismissAction.callAsFunction()
-                        }
-                        
-                        Circle()
-                            .foregroundColor(Color(0xFFFFFF, opacity: 0.25))
-                            .zIndex(-1)
-                            .scaleEffect(1.25)
-                    }
+                if let photo = $exhibitionData.photo2.wrappedValue {
+                    PhotoPageView(photo: .constant(photo))
+                }
+                if let photo = $exhibitionData.photo3.wrappedValue {
+                    PhotoPageView(photo: .constant(photo))
+                }
+                if let photo = $exhibitionData.photo4.wrappedValue {
+                    PhotoPageView(photo: .constant(photo))
                 }
             }
-            .navigationBarTitle("")
-            .navigationBarBackButtonHidden(true)
+            .tabViewStyle(PageTabViewStyle())
         }
+        .background(.black)
+        .edgesIgnoringSafeArea(.all)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                ZStack {
+                    BackButton {
+                        dismissAction.callAsFunction()
+                    }
+                    
+                    Circle()
+                        .foregroundColor(Color(0xFFFFFF, opacity: 0.25))
+                        .zIndex(-1)
+                        .scaleEffect(1.25)
+                }
+            }
+        }
+        .navigationBarTitle("")
+        .navigationBarBackButtonHidden(true)
     }
 }
 

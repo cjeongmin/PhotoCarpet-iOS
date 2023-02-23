@@ -84,6 +84,18 @@ final class ExhibitionData: ObservableObject {
         return formatter.string(from: date)
     }
     
+    var isFillData: Bool {
+        return (
+            !title.isEmpty &&
+            !description.isEmpty &&
+            hashTags.count > 0 &&
+            photo1 != nil && !price1.isEmpty &&
+            photo2 != nil && !price2.isEmpty &&
+            photo3 != nil && !price3.isEmpty &&
+            photo4 != nil && !price4.isEmpty
+        )
+    }
+    
     func clear() {
         photo1 = nil
         photo2 = nil

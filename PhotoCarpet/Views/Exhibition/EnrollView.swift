@@ -13,115 +13,107 @@ struct EnrollView: View {
     @Binding var isEdit: Bool
     
     var body: some View {
-        NavigationStack {
-            ZStack {
-                Color.clear
+        ZStack {
+            Color.clear
+            VStack(alignment: .leading) {
+                
                 VStack(alignment: .leading) {
-                    
-                    VStack(alignment: .leading) {
-                        Text("작품 선택")
-                            .font(.system(size: 22))
-                            .fontWeight(.bold)
-                        Text("* 첫번째 사진은 썸네일 화면입니다.")
-                            .font(.system(size: 14))
+                    Text("작품 선택")
+                        .font(.system(size: 22))
+                        .fontWeight(.bold)
+                    Text("* 첫번째 사진은 썸네일 화면입니다.")
+                        .font(.system(size: 14))
+                }
+                .padding(.top)
+                
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 12) {
+                        ImageSelector(price: $exhibitionData.price1 , selectedImage: $exhibitionData.photo1)
+                        ImageSelector(price: $exhibitionData.price2 , selectedImage: $exhibitionData.photo2)
+                        ImageSelector(price: $exhibitionData.price3 , selectedImage: $exhibitionData.photo3)
+                        ImageSelector(price: $exhibitionData.price4 , selectedImage: $exhibitionData.photo4)
                     }
-                    .padding(.top)
-                    
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 12) {
-                            ImageSelector(price: $exhibitionData.price1 , selectedImage: $exhibitionData.photo1)
-                            ImageSelector(price: $exhibitionData.price2 , selectedImage: $exhibitionData.photo2)
-                            ImageSelector(price: $exhibitionData.price3 , selectedImage: $exhibitionData.photo3)
-                            ImageSelector(price: $exhibitionData.price4 , selectedImage: $exhibitionData.photo4)
-                        }
+                }
+                
+                CustomTextField(title: "전시회 제목", placeholder: "전시회 제목을 입력해주세요", text: $exhibitionData.title)
+                
+                CustomTextField(title: "간단한 설명", placeholder: "설명을 입력해주세요", text: $exhibitionData.description)
+                
+                CustomTextField(title: "해시태그", placeholder: "태그를 입력해주세요", text: $exhibitionData.rawHashTags)
+                
+                VStack(alignment: .leading) {
+                    Text("전시회 마감일")
+                    VStack {
+                        DatePicker("", selection: $exhibitionData.date)
+                            .datePickerStyle(.compact)
+                            .labelsHidden()
                     }
-                    
-                    CustomTextField(title: "전시회 제목", placeholder: "전시회 제목을 입력해주세요", text: $exhibitionData.title)
-                    
-                    CustomTextField(title: "간단한 설명", placeholder: "설명을 입력해주세요", text: $exhibitionData.description)
-                    
-                    CustomTextField(title: "해시태그", placeholder: "태그를 입력해주세요", text: $exhibitionData.rawHashTags)
-                    
-                    VStack(alignment: .leading) {
-                        Text("전시회 마감일")
-                        VStack {
-                            DatePicker("", selection: $exhibitionData.date)
-                                .datePickerStyle(.compact)
-                                .labelsHidden()
-                        }
-                    }.padding(.top)
-                    
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    
-                    if (!exhibitionData.title.isEmpty &&
-                        !exhibitionData.description.isEmpty &&
-                        exhibitionData.hashTags.count > 0 &&
-                        exhibitionData.photo1 != nil &&
-                        exhibitionData.photo2 != nil &&
-                        exhibitionData.photo3 != nil &&
-                        exhibitionData.photo4 != nil
-                    ) {
-                        if !isEdit {
-                            NavigationLink {
-                                ExhibitionMainView()
-                            } label: {
-                                Group {
-                                    Text("전시회 \(isEdit ? "수정" : "등록")하기")
-                                        .frame(maxWidth: .infinity, alignment: .center)
-                                        .font(.system(size: 18).bold())
-                                        .foregroundColor(.white)
-                                }
-                                .frame(maxWidth: .infinity, minHeight: 50)
-                                .background(Color(.black))
-                                .cornerRadius(10)
-                                .padding(.trailing, 28)
+                }.padding(.top)
+                
+                Spacer()
+                Spacer()
+                Spacer()
+                
+                if exhibitionData.isFillData {
+                    if !isEdit {
+                        NavigationLink() {
+                            ExhibitionMainView()
+                            // TODO: 전시회 등록 API 호출
+                        } label: {
+                            Group {
+                                Text("전시회 등록하기")
+                                    .frame(maxWidth: .infinity, alignment: .center)
+                                    .font(.system(size: 18).bold())
+                                    .foregroundColor(.white)
                             }
-                        } else {
-                            Button {
-                                dismissAction.callAsFunction()
-                            } label: {
-                                Group {
-                                    Text("전시회 \(isEdit ? "수정" : "등록")하기")
-                                        .frame(maxWidth: .infinity, alignment: .center)
-                                        .font(.system(size: 18).bold())
-                                        .foregroundColor(.white)
-                                }
-                                .frame(maxWidth: .infinity, minHeight: 50)
-                                .background(Color(.black))
-                                .cornerRadius(10)
-                                .padding(.trailing, 28)
-                            }
+                            .frame(maxWidth: .infinity, minHeight: 50)
+                            .background(Color(.black))
+                            .cornerRadius(10)
+                            .padding(.trailing, 28)
                         }
                     } else {
-                        Group {
-                            Text("전시회 \(isEdit ? "수정" : "등록")하기")
-                                .frame(maxWidth: .infinity, alignment: .center)
-                                .font(.system(size: 18).bold())
-                                .foregroundColor(.white)
-                        }
-                        .frame(maxWidth: .infinity, minHeight: 50)
-                        .background(Color(0x000000, opacity: 0.5))
-                        .cornerRadius(10)
-                        .padding(.trailing, 28)
-                    }
-                }
-                .padding(.leading, 31)
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .toolbar {
-                ToolbarItemGroup(placement: .navigationBarLeading) {
-                    BackButton {
-                        dismissAction.callAsFunction()
-                        if !isEdit {
-                            exhibitionData.clear()
+                        Button {
+                            dismissAction.callAsFunction()
+                        } label: {
+                            Group {
+                                Text("전시회 수정하기")
+                                    .frame(maxWidth: .infinity, alignment: .center)
+                                    .font(.system(size: 18).bold())
+                                    .foregroundColor(.white)
+                            }
+                            .frame(maxWidth: .infinity, minHeight: 50)
+                            .background(Color(.black))
+                            .cornerRadius(10)
+                            .padding(.trailing, 28)
                         }
                     }
+                } else {
+                    Group {
+                        Text("전시회 \(isEdit ? "수정" : "등록")하기")
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .font(.system(size: 18).bold())
+                            .foregroundColor(.white)
+                    }
+                    .frame(maxWidth: .infinity, minHeight: 50)
+                    .background(Color(0x000000, opacity: 0.5))
+                    .cornerRadius(10)
+                    .padding(.trailing, 28)
                 }
             }
-            .navigationBarBackButtonHidden(true)
+            .padding(.leading, 31)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .toolbar {
+            ToolbarItemGroup(placement: .navigationBarLeading) {
+                BackButton {
+                    dismissAction.callAsFunction()
+                    if !isEdit {
+                        exhibitionData.clear()
+                    }
+                }
+            }
+        }
+        .navigationBarBackButtonHidden(true)
     }
 }
 
