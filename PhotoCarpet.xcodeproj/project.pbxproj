@@ -11,6 +11,7 @@
 		133DE2E729A61C2C00AFAD29 /* PhotoDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133DE2E629A61C2C00AFAD29 /* PhotoDisplayView.swift */; };
 		133DE2EB29A673C700AFAD29 /* ExhibitionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133DE2EA29A673C700AFAD29 /* ExhibitionData.swift */; };
 		1340019829A7B86400595EF1 /* Like.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1340019729A7B86400595EF1 /* Like.swift */; };
+		1340019A29A7BB9500595EF1 /* BuyModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1340019929A7BB9500595EF1 /* BuyModal.swift */; };
 		1344F1C229A5EB8300FD3FA3 /* ExhibitionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1344F1C129A5EB8300FD3FA3 /* ExhibitionDetailView.swift */; };
 		13CEFBC829A7A27C009B99EA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CEFBC729A7A27C009B99EA /* User.swift */; };
 		13E938F929A0D92400A6CA0B /* PhotoCarpetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E938F829A0D92400A6CA0B /* PhotoCarpetApp.swift */; };
@@ -30,6 +31,7 @@
 		133DE2E629A61C2C00AFAD29 /* PhotoDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDisplayView.swift; sourceTree = "<group>"; };
 		133DE2EA29A673C700AFAD29 /* ExhibitionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExhibitionData.swift; sourceTree = "<group>"; };
 		1340019729A7B86400595EF1 /* Like.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Like.swift; sourceTree = "<group>"; };
+		1340019929A7BB9500595EF1 /* BuyModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyModal.swift; sourceTree = "<group>"; };
 		1344F1C129A5EB8300FD3FA3 /* ExhibitionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExhibitionDetailView.swift; sourceTree = "<group>"; };
 		13CEFBC729A7A27C009B99EA /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		13E938F529A0D92400A6CA0B /* PhotoCarpet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoCarpet.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,6 +114,7 @@
 				13EBBA2A29A5D5E50079CC52 /* BackButton.swift */,
 				133DE2E329A60D8900AFAD29 /* Tag.swift */,
 				1340019729A7B86400595EF1 /* Like.swift */,
+				1340019929A7BB9500595EF1 /* BuyModal.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -220,6 +223,7 @@
 				133DE2E429A60D8900AFAD29 /* Tag.swift in Sources */,
 				13E938FB29A0D92400A6CA0B /* ContentView.swift in Sources */,
 				13EBBA2629A536350079CC52 /* CustomTextField.swift in Sources */,
+				1340019A29A7BB9500595EF1 /* BuyModal.swift in Sources */,
 				13EBBA1E29A51C600079CC52 /* EnrollView.swift in Sources */,
 				1340019829A7B86400595EF1 /* Like.swift in Sources */,
 				133DE2E729A61C2C00AFAD29 /* PhotoDisplayView.swift in Sources */,
