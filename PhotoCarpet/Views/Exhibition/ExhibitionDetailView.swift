@@ -20,15 +20,7 @@ struct ExhibitionDetailView: View {
                     .font(.system(size: 35, weight: .bold))
                     .frame(maxWidth: .infinity,alignment: .leading)
                 Spacer()
-                Button {
-                    withAnimation(.easeInOut) {
-                        exhibitionData.isLiked.toggle()
-                    }
-                } label: {
-                    Image(systemName: exhibitionData.isLiked ? "heart.fill" : "heart")
-                        .scaleEffect(exhibitionData.isLiked ? 1.5 : 1)
-                        .foregroundColor(exhibitionData.isLiked ? .red : .black)
-                }
+                Like(isLiked: $exhibitionData.isLiked) {}
             }
             HStack {
                 Circle()

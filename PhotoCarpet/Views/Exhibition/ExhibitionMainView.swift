@@ -113,15 +113,8 @@ struct ExhibitionMainView: View {
                 }
             } else {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        // TODO: 전시회 좋아요 추가
-                        withAnimation(.easeInOut) {
-                            exhibitionData.isLiked.toggle()
-                        }
-                    } label: {
-                        Image(systemName: exhibitionData.isLiked ? "heart.fill" : "heart")
-                            .scaleEffect(exhibitionData.isLiked ? 1.5 : 1)
-                            .foregroundColor(exhibitionData.isLiked ? .red : .black)
+                    Like(isLiked: $exhibitionData.isLiked) {
+                        // TODO: 전시회 좋아요 API 호출
                     }
                     .padding(.trailing)
                 }
