@@ -27,7 +27,7 @@ struct ArtistItem: View {
                 Text("아티스트 이름")
                     .font(.system(size: 14, weight: .semibold))
                 Text(profileMessage)
-                    .font(.system(size: 13, weight: .ultraLight))
+                    .font(.system(size: 12, weight: .light))
             }
             .padding(.top, 20)
         }

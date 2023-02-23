@@ -10,15 +10,21 @@ import SwiftUI
 struct ExhibitionItem: View {
     var body: some View {
         ViewThatFits {
-            ZStack(alignment: .leading) {
+            ZStack {
                 Image("Image")
                     .renderingMode(.original)
                     .resizable()
                     .frame(width: 150, height: 250)
                     .cornerRadius(5)
 
-                InfoItem()
-                    .offset(x: 10, y: 95)
+                VStack {
+                    Spacer()
+                    ExhibitionInfo()
+                }
+                .padding(EdgeInsets(top: 0, leading: 10, bottom: 10, trailing: 0))
+                .frame(width: 150, height: 250, alignment: .leading)
+                
+                    
             } // ZStack
 
             ZStack(alignment: .leading) {
@@ -28,32 +34,14 @@ struct ExhibitionItem: View {
                     .frame(width: 120, height: 200)
                     .cornerRadius(5)
 
-                InfoItem()
-                    .offset(x: 10, y: 70)
+                VStack(alignment: .leading) {
+                    Spacer()
+                    ExhibitionInfo()
+                }
+                .padding(EdgeInsets(top: 0, leading: 8, bottom: 8, trailing: 0))
+                .frame(width: 120, height: 200, alignment: .leading)
             } // ZStack
         }
-    }
-}
-
-struct InfoItem: View {
-    var body: some View {
-        VStack(alignment: .leading, spacing: 2) {
-            Text("전시회 제목1")
-                .foregroundColor(.white)
-                .font(.system(size: 15, weight: .bold))
-
-            HStack {
-                Image("artist")
-                    .renderingMode(.original)
-                    .resizable()
-                    .frame(width: 30, height: 30)
-                    .clipShape(Circle())
-
-                Text("아트스트 이름")
-                    .foregroundColor(.white)
-                    .font(.system(size: 12, weight: .bold))
-            } // HStack
-        } // VStack
     }
 }
 

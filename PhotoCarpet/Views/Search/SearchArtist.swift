@@ -17,12 +17,13 @@ struct SearchArtist: View {
                     NavigationLink {
                         Text("정환이형 프로필 관리 페이지")
                     } label: {
-                        ArtistItem(profileMessage: String(repeating: "프로필 메세지", count: index))
+                        ArtistItem(profileMessage: String(repeating: "hello world ", count: index))
                     }
                 }
             }
             .padding(.top, 15)
         }
+        .scrollIndicators(.hidden)
     }
 }
 

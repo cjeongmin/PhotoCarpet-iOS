@@ -28,7 +28,7 @@ struct CustomNavBarView: View {
             }
             
             NavigationLink {
-                Text("이건 뭘 원하는 걸까")
+                LikeHome()
             } label: {
                 Image(systemName: "ellipsis")
             }

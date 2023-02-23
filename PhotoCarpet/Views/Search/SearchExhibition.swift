@@ -23,6 +23,8 @@ struct SearchExhibition: View {
                 }
             }
         }
+        .padding(.horizontal, 20)
+        .scrollIndicators(.hidden)
     }
 }
 

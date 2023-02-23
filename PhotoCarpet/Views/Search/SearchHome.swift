@@ -38,7 +38,7 @@ struct SearchHome: View {
                         .fontWeight(isExActive ? .bold : .regular)
                 }
             }
-            .frame(width: 210)
+            .frame(width: 200)
 
             isExActive ? AnyView(SearchExhibition()) : AnyView(SearchArtist())
         }
