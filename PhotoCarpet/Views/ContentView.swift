@@ -8,15 +8,31 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var exhibitionData: ExhibitionData
+    
     var body: some View {
-        NavigationStack {
-            NavigationLink {
-                EnrollView(isEdit: .constant(false))
-            } label: {
-                Text("GO")
+        NavigationView {
+            List {
+                NavigationLink {
+                    EnrollView(isEdit: .constant(false))
+                } label: {
+                    Text("등록")
+                }
+                .isDetailLink(false)
+                
+                NavigationLink {
+                    ExhibitionMainView()
+                        .onAppear {
+                            // TODO: request data from server
+                            exhibitionData.setDummyData()
+                        }
+                } label: {
+                    Text("전시회 클릭시")
+                }
+                .isDetailLink(false)
             }
-            .isDetailLink(false)
         }
+        .navigationViewStyle(.stack)
     }
 }
 
@@ -45,7 +61,6 @@ struct NavigationUtil {
         for childViewController in viewController.children {
             return findNavigationController(viewController: childViewController)
         }
-        
         return nil
     }
 }

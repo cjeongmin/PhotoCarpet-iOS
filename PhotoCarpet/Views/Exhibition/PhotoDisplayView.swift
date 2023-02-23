@@ -34,15 +34,8 @@ struct PhotoDisplayView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                ZStack {
-                    BackButton {
-                        dismissAction.callAsFunction()
-                    }
-                    
-                    Circle()
-                        .foregroundColor(Color(0xFFFFFF, opacity: 0.25))
-                        .zIndex(-1)
-                        .scaleEffect(1.25)
+                BackButton {
+                    dismissAction.callAsFunction()
                 }
             }
         }

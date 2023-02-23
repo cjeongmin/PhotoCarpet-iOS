@@ -60,44 +60,38 @@ struct EnrollView: View {
                             ExhibitionMainView()
                             // TODO: 전시회 등록 API 호출
                         } label: {
-                            Group {
-                                Text("전시회 등록하기")
-                                    .frame(maxWidth: .infinity, alignment: .center)
-                                    .font(.system(size: 18).bold())
-                                    .foregroundColor(.white)
-                            }
-                            .frame(maxWidth: .infinity, minHeight: 50)
-                            .background(Color(.black))
-                            .cornerRadius(10)
-                            .padding(.trailing, 28)
+                            Text("전시회 등록하기")
+                                .frame(maxWidth: .infinity, alignment: .center)
+                                .font(.system(size: 18).bold())
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity, minHeight: 50)
+                                .background(Color(.black))
+                                .cornerRadius(10)
+                                .padding(.trailing, 28)
                         }
                     } else {
                         Button {
                             dismissAction.callAsFunction()
                         } label: {
-                            Group {
-                                Text("전시회 수정하기")
-                                    .frame(maxWidth: .infinity, alignment: .center)
-                                    .font(.system(size: 18).bold())
-                                    .foregroundColor(.white)
-                            }
-                            .frame(maxWidth: .infinity, minHeight: 50)
-                            .background(Color(.black))
-                            .cornerRadius(10)
-                            .padding(.trailing, 28)
+                            Text("전시회 수정하기")
+                                .frame(maxWidth: .infinity, alignment: .center)
+                                .font(.system(size: 18).bold())
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity, minHeight: 50)
+                                .background(Color(.black))
+                                .cornerRadius(10)
+                                .padding(.trailing, 28)
                         }
                     }
                 } else {
-                    Group {
-                        Text("전시회 \(isEdit ? "수정" : "등록")하기")
-                            .frame(maxWidth: .infinity, alignment: .center)
-                            .font(.system(size: 18).bold())
-                            .foregroundColor(.white)
-                    }
-                    .frame(maxWidth: .infinity, minHeight: 50)
-                    .background(Color(0x000000, opacity: 0.5))
-                    .cornerRadius(10)
-                    .padding(.trailing, 28)
+                    Text("전시회 \(isEdit ? "수정" : "등록")하기")
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .font(.system(size: 18).bold())
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity, minHeight: 50)
+                        .background(Color(0x000000, opacity: 0.5))
+                        .cornerRadius(10)
+                        .padding(.trailing, 28)
                 }
             }
             .padding(.leading, 31)

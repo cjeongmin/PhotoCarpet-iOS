@@ -9,6 +9,8 @@ import Foundation
 import SwiftUI
 
 final class ExhibitionData: ObservableObject {
+    var userId: Int? // User Id 있으면, 다른 사람의 전시회
+    
     @Published var photo1: Image?
     @Published var photo2: Image?
     @Published var photo3: Image?
@@ -68,6 +70,8 @@ final class ExhibitionData: ObservableObject {
     @Published var rawHashTags: String = ""
     @Published var date: Date = Date()
     
+    @Published var isLiked: Bool = false
+    
     var hashTags: [String] {
         var hashTags: [String] = []
         for tag in rawHashTags.components(separatedBy: " ") {
@@ -109,5 +113,23 @@ final class ExhibitionData: ObservableObject {
         description = ""
         rawHashTags = ""
         date = Date()
+        isLiked = false
+    }
+    
+    func setDummyData() {
+        userId = 1
+        photo1 = Image("example")
+        photo2 = Image("example")
+        photo3 = Image("example")
+        photo4 = Image("example")
+        price1 = "1000"
+        price2 = "2000"
+        price3 = "3000"
+        price4 = "4000"
+        title = "테스트"
+        description = "테스트용 더미 데이터입니다."
+        rawHashTags = "#테스트 #태그1 #태그2 #iOS"
+        date = Date()
+        isLiked = true
     }
 }

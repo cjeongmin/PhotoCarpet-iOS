@@ -13,8 +13,6 @@ struct ExhibitionDetailView: View {
 //    @Binding var profileImage: Image?
 //    @Binding var userName: String
     
-    @State var isLiked: Bool = false
-    
     var body: some View {
         VStack(alignment: .leading) {
             HStack(alignment: .center) {
@@ -24,12 +22,12 @@ struct ExhibitionDetailView: View {
                 Spacer()
                 Button {
                     withAnimation(.easeInOut) {
-                        isLiked.toggle()
+                        exhibitionData.isLiked.toggle()
                     }
                 } label: {
-                    Image(systemName: isLiked ? "heart.fill" : "heart")
-                        .scaleEffect(isLiked ? 1.5 : 1)
-                        .foregroundColor(isLiked ? .red : .black)
+                    Image(systemName: exhibitionData.isLiked ? "heart.fill" : "heart")
+                        .scaleEffect(exhibitionData.isLiked ? 1.5 : 1)
+                        .foregroundColor(exhibitionData.isLiked ? .red : .black)
                 }
             }
             HStack {
