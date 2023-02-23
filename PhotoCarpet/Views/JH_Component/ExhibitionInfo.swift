@@ -8,8 +8,20 @@
 import SwiftUI
 
 struct ExhibitionInfo: View {
+    var exhibitionTitle: String
+    
+    init(exhibitionTitle: String = "전시회1") {
+        self.exhibitionTitle = exhibitionTitle
+    }
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(alignment: .leading, spacing: 2) {
+            Text(exhibitionTitle)
+                .foregroundColor(.white)
+                .font(.system(size: 15, weight: .bold))
+            
+            ArtistInfo()
+        } // VStack
     }
 }
 

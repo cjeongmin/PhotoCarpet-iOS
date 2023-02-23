@@ -8,8 +8,26 @@
 import SwiftUI
 
 struct ArtistInfo: View {
+    var artistProfileUrl: String
+    var artistName: String
+    
+    init(artistProfileUrl: String = "artist", artistName: String = "아티스트 이름") {
+        self.artistProfileUrl = artistProfileUrl
+        self.artistName = artistName
+    }
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            Image("artist")
+                .renderingMode(.original)
+                .resizable()
+                .frame(width: 30, height: 30)
+                .clipShape(Circle())
+
+            Text("아트스트 이름")
+                .foregroundColor(.white)
+                .font(.system(size: 12, weight: .bold))
+        } // HStack
     }
 }
 
