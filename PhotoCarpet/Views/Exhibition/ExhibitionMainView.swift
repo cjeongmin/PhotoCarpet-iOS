@@ -83,7 +83,7 @@ struct ExhibitionMainView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(content: {
-            if let photo = exhibitionData.photo1 {
+            if let photo = exhibitionData.photo1.photo {
                 photo
                     .resizable()
                     .renderingMode(.original)

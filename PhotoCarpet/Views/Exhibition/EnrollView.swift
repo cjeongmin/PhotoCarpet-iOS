@@ -28,10 +28,10 @@ struct EnrollView: View {
                 
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 12) {
-                        ImageSelector(price: $exhibitionData.price1 , selectedImage: $exhibitionData.photo1)
-                        ImageSelector(price: $exhibitionData.price2 , selectedImage: $exhibitionData.photo2)
-                        ImageSelector(price: $exhibitionData.price3 , selectedImage: $exhibitionData.photo3)
-                        ImageSelector(price: $exhibitionData.price4 , selectedImage: $exhibitionData.photo4)
+                        ImageSelector(photo: $exhibitionData.photo1)
+                        ImageSelector(photo: $exhibitionData.photo2)
+                        ImageSelector(photo: $exhibitionData.photo3)
+                        ImageSelector(photo: $exhibitionData.photo4)
                     }
                 }
                 
@@ -39,7 +39,7 @@ struct EnrollView: View {
                 
                 CustomTextField(title: "간단한 설명", placeholder: "설명을 입력해주세요", text: $exhibitionData.description)
                 
-                CustomTextField(title: "해시태그", placeholder: "태그를 입력해주세요", text: $exhibitionData.rawHashTags)
+                CustomTextField(title: "해시태그", placeholder: "#태그1 #태그2", text: $exhibitionData.rawHashTags)
                 
                 VStack(alignment: .leading) {
                     Text("전시회 마감일")
@@ -58,7 +58,10 @@ struct EnrollView: View {
                     if !isEdit {
                         NavigationLink() {
                             ExhibitionMainView()
-                            // TODO: 전시회 등록 API 호출
+                                .onAppear {
+                                    // TODO: 전시회 등록 API 호출
+                                    exhibitionData.userId = User.shared.userId
+                                }
                         } label: {
                             Text("전시회 등록하기")
                                 .frame(maxWidth: .infinity, alignment: .center)

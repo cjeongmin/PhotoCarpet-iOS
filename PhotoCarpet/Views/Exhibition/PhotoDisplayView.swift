@@ -14,17 +14,29 @@ struct PhotoDisplayView: View {
     var body: some View {
         ZStack {
             TabView {
-                if let photo = $exhibitionData.photo1.wrappedValue {
-                    PhotoPageView(photo: .constant(photo))
+                if let photo = $exhibitionData.photo1.photo.wrappedValue {
+                    PhotoPageView(
+                        photo: .constant(photo),
+                        isLiked: $exhibitionData.photo1.isLiked
+                    )
                 }
-                if let photo = $exhibitionData.photo2.wrappedValue {
-                    PhotoPageView(photo: .constant(photo))
+                if let photo = $exhibitionData.photo2.photo.wrappedValue {
+                    PhotoPageView(
+                        photo: .constant(photo),
+                        isLiked: $exhibitionData.photo2.isLiked
+                    )
                 }
-                if let photo = $exhibitionData.photo3.wrappedValue {
-                    PhotoPageView(photo: .constant(photo))
+                if let photo = $exhibitionData.photo3.photo.wrappedValue {
+                    PhotoPageView(
+                        photo: .constant(photo),
+                        isLiked: $exhibitionData.photo3.isLiked
+                    )
                 }
-                if let photo = $exhibitionData.photo4.wrappedValue {
-                    PhotoPageView(photo: .constant(photo))
+                if let photo = $exhibitionData.photo4.photo.wrappedValue {
+                    PhotoPageView(
+                        photo: .constant(photo),
+                        isLiked: $exhibitionData.photo4.isLiked
+                    )
                 }
             }
             .tabViewStyle(PageTabViewStyle())
@@ -46,6 +58,7 @@ struct PhotoDisplayView: View {
 
 struct PhotoPageView: View {
     @Binding var photo: Image
+    @Binding var isLiked: Bool
     
     var body: some View {
         photo

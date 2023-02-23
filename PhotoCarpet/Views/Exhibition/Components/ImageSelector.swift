@@ -10,15 +10,14 @@ import PhotosUI
 
 struct ImageSelector: View {
     @State private var selectedItem: PhotosPickerItem?
-    @Binding var price: String
-    @Binding var selectedImage: Image?
+    @Binding var photo: ExhibitionData.Photo
     
     var body: some View {
         ZStack {
             VStack {
                 ZStack {
-                    if let selectedImage {
-                        selectedImage
+                    if let photo = photo.photo {
+                        photo
                             .renderingMode(.original)
                             .resizable()
                             .frame(width: 94, height: 179)
@@ -28,7 +27,7 @@ struct ImageSelector: View {
                             .foregroundColor(Color(0xf5f5f5))
                     }
                     PhotosPicker(selection: $selectedItem, matching: .images) {
-                        if selectedImage == nil {
+                        if photo.photo == nil {
                             Image(systemName: "plus")
                                 .foregroundColor(.black)
                         } else {
@@ -40,7 +39,7 @@ struct ImageSelector: View {
                         Task {
                             if let data = try? await newItem?.loadTransferable(type: Data.self) {
                                 if let uiImage = UIImage(data: data) {
-                                    selectedImage = Image(uiImage: uiImage)
+                                    photo.photo = Image(uiImage: uiImage)
                                     return
                                 }
                             }
@@ -49,7 +48,7 @@ struct ImageSelector: View {
                 }
                 .frame(width: 94, height: 179)
                 
-                TextField("가격을 입력해주세요.", text: $price)
+                TextField("가격을 입력해주세요.", text: $photo.price)
                     .font(.custom("system", size: 10, relativeTo: .footnote))
                     .keyboardType(.decimalPad)
                     .multilineTextAlignment(.center)
@@ -64,6 +63,6 @@ struct ImageSelector: View {
 
 struct ImageSelector_Previews: PreviewProvider {
     static var previews: some View {
-        ImageSelector(price: .constant(""), selectedImage: .constant(nil))
+        ImageSelector(photo: .constant(ExhibitionData.Photo()))
     }
 }

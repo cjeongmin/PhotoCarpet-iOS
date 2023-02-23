@@ -8,62 +8,31 @@
 import Foundation
 import SwiftUI
 
+
 final class ExhibitionData: ObservableObject {
+    struct Photo {
+        var photo: Image?
+        var price: String = "" {
+            didSet {
+                let filtered = price.filter { $0.isNumber }
+                if filtered == "0" {
+                    price = ""
+                } else if filtered.count > 9 {
+                    price = String(filtered[filtered.startIndex ..< filtered.index(filtered.endIndex, offsetBy: -1)])
+                } else if price != filtered {
+                    price = filtered
+                }
+            }
+        }
+        var isLiked: Bool = false
+    }
+    
     var userId: Int? // User Id 있으면, 다른 사람의 전시회
     
-    @Published var photo1: Image?
-    @Published var photo2: Image?
-    @Published var photo3: Image?
-    @Published var photo4: Image?
-    
-    @Published var price1: String = "" {
-        didSet {
-            let filtered = price1.filter { $0.isNumber }
-            if filtered == "0" {
-                price1 = ""
-            } else if filtered.count > 9 {
-                price1 = String(filtered[filtered.startIndex ..< filtered.index(filtered.endIndex, offsetBy: -1)])
-            } else if price1 != filtered {
-                price1 = filtered
-            }
-        }
-    }
-    @Published var price2: String = "" {
-        didSet {
-            let filtered = price2.filter { $0.isNumber }
-            if filtered == "0" {
-                price2 = ""
-            } else if filtered.count > 9 {
-                price2 = String(filtered[filtered.startIndex ..< filtered.index(filtered.endIndex, offsetBy: -1)])
-            } else if price2 != filtered {
-                price2 = filtered
-            }
-        }
-    }
-    @Published var price3: String = "" {
-        didSet {
-            let filtered = price3.filter { $0.isNumber }
-            if filtered == "0" {
-                price3 = ""
-            } else if filtered.count > 9 {
-                price3 = String(filtered[filtered.startIndex ..< filtered.index(filtered.endIndex, offsetBy: -1)])
-            } else if price3 != filtered {
-                price3 = filtered
-            }
-        }
-    }
-    @Published var price4: String = "" {
-        didSet {
-            let filtered = price4.filter { $0.isNumber }
-            if filtered == "0" {
-                price4 = ""
-            } else if filtered.count > 9 {
-                price4 = String(filtered[filtered.startIndex ..< filtered.index(filtered.endIndex, offsetBy: -1)])
-            } else if price4 != filtered {
-                price4 = filtered
-            }
-        }
-    }
+    @Published var photo1: Photo = Photo()
+    @Published var photo2: Photo = Photo()
+    @Published var photo3: Photo = Photo()
+    @Published var photo4: Photo = Photo()
     
     @Published var title: String = ""
     @Published var description: String = ""
@@ -89,26 +58,24 @@ final class ExhibitionData: ObservableObject {
     }
     
     var isFillData: Bool {
+        print(title, description, hashTags, photo1, photo2, photo3, photo4, separator: "\n\n")
+        
         return (
             !title.isEmpty &&
             !description.isEmpty &&
             hashTags.count > 0 &&
-            photo1 != nil && !price1.isEmpty &&
-            photo2 != nil && !price2.isEmpty &&
-            photo3 != nil && !price3.isEmpty &&
-            photo4 != nil && !price4.isEmpty
+            photo1.photo != nil && !photo1.price.isEmpty &&
+            photo2.photo != nil && !photo2.price.isEmpty &&
+            photo3.photo != nil && !photo3.price.isEmpty &&
+            photo4.photo != nil && !photo4.price.isEmpty
         )
     }
     
     func clear() {
-        photo1 = nil
-        photo2 = nil
-        photo3 = nil
-        photo4 = nil
-        price1 = ""
-        price2 = ""
-        price3 = ""
-        price4 = ""
+        photo1 = Photo()
+        photo2 = Photo()
+        photo3 = Photo()
+        photo4 = Photo()
         title = ""
         description = ""
         rawHashTags = ""
@@ -118,14 +85,10 @@ final class ExhibitionData: ObservableObject {
     
     func setDummyData() {
         userId = 1
-        photo1 = Image("example")
-        photo2 = Image("example")
-        photo3 = Image("example")
-        photo4 = Image("example")
-        price1 = "1000"
-        price2 = "2000"
-        price3 = "3000"
-        price4 = "4000"
+        photo1 = Photo(photo: Image("example"), price: "1000", isLiked: true)
+        photo2 = Photo(photo: Image("example"), price: "2000", isLiked: false)
+        photo3 = Photo(photo: Image("example"), price: "3000", isLiked: false)
+        photo4 = Photo(photo: Image("example"), price: "4000", isLiked: true)
         title = "테스트"
         description = "테스트용 더미 데이터입니다."
         rawHashTags = "#테스트 #태그1 #태그2 #iOS"
