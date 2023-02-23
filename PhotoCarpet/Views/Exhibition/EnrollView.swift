@@ -14,7 +14,7 @@ struct EnrollView: View {
     
     var body: some View {
         NavigationStack {
-            ZStack(alignment: .topLeading) {
+            ZStack {
                 Color.clear
                 VStack(alignment: .leading) {
                     
@@ -29,10 +29,10 @@ struct EnrollView: View {
                     
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 12) {
-                            ImageSelector(selectedImage: $exhibitionData.photo1)
-                            ImageSelector(selectedImage: $exhibitionData.photo2)
-                            ImageSelector(selectedImage: $exhibitionData.photo3)
-                            ImageSelector(selectedImage: $exhibitionData.photo4)
+                            ImageSelector(price: $exhibitionData.price1 , selectedImage: $exhibitionData.photo1)
+                            ImageSelector(price: $exhibitionData.price2 , selectedImage: $exhibitionData.photo2)
+                            ImageSelector(price: $exhibitionData.price3 , selectedImage: $exhibitionData.photo3)
+                            ImageSelector(price: $exhibitionData.price4 , selectedImage: $exhibitionData.photo4)
                         }
                     }
                     
@@ -51,6 +51,8 @@ struct EnrollView: View {
                         }
                     }.padding(.top)
                     
+                    Spacer()
+                    Spacer()
                     Spacer()
                     
                     if (!exhibitionData.title.isEmpty &&
@@ -71,7 +73,7 @@ struct EnrollView: View {
                                         .font(.system(size: 18).bold())
                                         .foregroundColor(.white)
                                 }
-                                .frame(maxWidth: .infinity, minHeight: 60)
+                                .frame(maxWidth: .infinity, minHeight: 50)
                                 .background(Color(.black))
                                 .cornerRadius(10)
                                 .padding(.trailing, 28)
@@ -86,7 +88,7 @@ struct EnrollView: View {
                                         .font(.system(size: 18).bold())
                                         .foregroundColor(.white)
                                 }
-                                .frame(maxWidth: .infinity, minHeight: 60)
+                                .frame(maxWidth: .infinity, minHeight: 50)
                                 .background(Color(.black))
                                 .cornerRadius(10)
                                 .padding(.trailing, 28)
@@ -99,7 +101,7 @@ struct EnrollView: View {
                                 .font(.system(size: 18).bold())
                                 .foregroundColor(.white)
                         }
-                        .frame(maxWidth: .infinity, minHeight: 60)
+                        .frame(maxWidth: .infinity, minHeight: 50)
                         .background(Color(0x000000, opacity: 0.5))
                         .cornerRadius(10)
                         .padding(.trailing, 28)

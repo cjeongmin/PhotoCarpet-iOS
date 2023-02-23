@@ -14,6 +14,55 @@ final class ExhibitionData: ObservableObject {
     @Published var photo3: Image?
     @Published var photo4: Image?
     
+    @Published var price1: String = "" {
+        didSet {
+            let filtered = price1.filter { $0.isNumber }
+            if filtered == "0" {
+                price1 = ""
+            } else if filtered.count > 9 {
+                price1 = String(filtered[filtered.startIndex ..< filtered.index(filtered.endIndex, offsetBy: -1)])
+            } else if price1 != filtered {
+                price1 = filtered
+            }
+        }
+    }
+    @Published var price2: String = "" {
+        didSet {
+            let filtered = price2.filter { $0.isNumber }
+            if filtered == "0" {
+                price2 = ""
+            } else if filtered.count > 9 {
+                price2 = String(filtered[filtered.startIndex ..< filtered.index(filtered.endIndex, offsetBy: -1)])
+            } else if price2 != filtered {
+                price2 = filtered
+            }
+        }
+    }
+    @Published var price3: String = "" {
+        didSet {
+            let filtered = price3.filter { $0.isNumber }
+            if filtered == "0" {
+                price3 = ""
+            } else if filtered.count > 9 {
+                price3 = String(filtered[filtered.startIndex ..< filtered.index(filtered.endIndex, offsetBy: -1)])
+            } else if price3 != filtered {
+                price3 = filtered
+            }
+        }
+    }
+    @Published var price4: String = "" {
+        didSet {
+            let filtered = price4.filter { $0.isNumber }
+            if filtered == "0" {
+                price4 = ""
+            } else if filtered.count > 9 {
+                price4 = String(filtered[filtered.startIndex ..< filtered.index(filtered.endIndex, offsetBy: -1)])
+            } else if price4 != filtered {
+                price4 = filtered
+            }
+        }
+    }
+    
     @Published var title: String = ""
     @Published var description: String = ""
     @Published var rawHashTags: String = ""
@@ -40,6 +89,10 @@ final class ExhibitionData: ObservableObject {
         photo2 = nil
         photo3 = nil
         photo4 = nil
+        price1 = ""
+        price2 = ""
+        price3 = ""
+        price4 = ""
         title = ""
         description = ""
         rawHashTags = ""
