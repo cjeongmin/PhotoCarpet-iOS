@@ -9,6 +9,9 @@ import SwiftUI
 
 struct BuyModal: View {
     @Binding var price: String
+    @Binding var isActive: Bool
+    @Binding var showCompleteAlert: Bool
+    @Binding var showFailModal: Bool
     
     var body: some View {
         HStack(spacing: 20) {
@@ -22,7 +25,16 @@ struct BuyModal: View {
             }
             
             Button {
-                
+                if let price = Int(price) {
+                    withAnimation(.easeInOut(duration: 0.5)) {
+                        isActive.toggle()
+                        if User.shared.point >= price {
+                            showCompleteAlert.toggle()
+                        } else {
+                            showFailModal.toggle()
+                        }
+                    }
+                }
             } label: {
                 Text("구매하기")
                     .foregroundColor(.white)
@@ -32,7 +44,6 @@ struct BuyModal: View {
             .frame(width: UIScreen.main.bounds.size.width * 0.5)
             .background(.black)
             .cornerRadius(54)
-
         }
         .frame(width: UIScreen.main.bounds.size.width * 0.8)
         .padding()
@@ -50,7 +61,10 @@ struct BuyModal: View {
 struct BuyModal_Previews: PreviewProvider {
     static var previews: some View {
         BuyModal(
-            price: .constant("300")
+            price: .constant("300"),
+            isActive: .constant(true),
+            showCompleteAlert: .constant(false),
+            showFailModal: .constant(false)
         )
     }
 }

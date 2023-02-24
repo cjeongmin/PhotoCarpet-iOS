@@ -12,4 +12,5 @@ final class User {
     private init() {}
     
     let userId: Int = 0
+    var point: Int = 1500
 }

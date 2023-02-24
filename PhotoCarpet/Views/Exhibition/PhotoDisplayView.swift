@@ -14,13 +14,22 @@ extension AnyTransition {
             removal: .push(from: .top).combined(with: .opacity)
         )
     }
+    
+    static var alert: AnyTransition {
+        .asymmetric(
+            insertion: .push(from: .top),
+            removal: .opacity
+        )
+    }
 }
 
 struct PhotoDisplayView: View {
     @Environment(\.dismiss) var dismissAction
     @EnvironmentObject var exhibitionData: ExhibitionData
     @State private var selection = 0
-    @State private var pressBuyButton = false
+    @State private var isActive = false
+    @State private var showCompleteAlert = false
+    @State private var showFailModal = false
     
     var body: some View {
         let photos = [$exhibitionData.photo1, $exhibitionData.photo2, $exhibitionData.photo3, $exhibitionData.photo4]
@@ -39,12 +48,37 @@ struct PhotoDisplayView: View {
                     }
                 }
                 .tabViewStyle(PageTabViewStyle())
+                
                 VStack {
-                    if pressBuyButton {
+                    if isActive {
                         Spacer()
-                        BuyModal(price: photos[selection].price)
-                            .padding(.bottom, 50)
-                            .transition(.modal)
+                        BuyModal(
+                            price: photos[selection].price,
+                            isActive: $isActive,
+                            showCompleteAlert: $showCompleteAlert,
+                            showFailModal: $showFailModal
+                        )
+                        .padding(.bottom, 50)
+                        .transition(.modal)
+                    }
+                    
+                    if showCompleteAlert {
+                        CompleteAlert()
+                            .transition(.alert)
+                            .onAppear {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                                    withAnimation {
+                                        showCompleteAlert.toggle()
+                                    }
+                                }
+                            }
+                    }
+                    
+                    if showFailModal {
+                        FailModal(
+                            showFailModal: $showFailModal
+                        )
+                        .transition(.alert)
                     }
                 }
             }
@@ -63,15 +97,13 @@ struct PhotoDisplayView: View {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     Button {
                         withAnimation(.easeOut(duration: 0.5)) {
-                            pressBuyButton.toggle()
+                            isActive.toggle()
                         }
                     } label: {
                         Image(systemName: "dollarsign.circle")
                             .scaleEffect(1.25)
                             .foregroundColor(.black)
                     }
-                    
-                    
                     Like(isLiked: photos[selection].isLiked) {
                         // TODO: 전시물 좋아요 API 호출
                     }
