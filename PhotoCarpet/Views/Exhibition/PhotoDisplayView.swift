@@ -34,58 +34,53 @@ struct PhotoDisplayView: View {
     var body: some View {
         let photos = [$exhibitionData.photo1, $exhibitionData.photo2, $exhibitionData.photo3, $exhibitionData.photo4]
         
-        return NavigationView {
-            ZStack {
-                TabView(selection: $selection) {
-                    ForEach(photos.indices, id: \.self) { index in
-                        if let photo = photos[index].photo.wrappedValue {
-                            PhotoPageView(
-                                photo: .constant(photo),
-                                isLiked: photos[index].isLiked
-                            )
+        return ZStack {
+            TabView(selection: $selection) {
+                ForEach(photos.indices, id: \.self) { index in
+                    if let photo = photos[index].photo.wrappedValue {
+                        PhotoPageView(photo: .constant(photo))
                             .tag(index)
-                        }
-                    }
-                }
-                .tabViewStyle(PageTabViewStyle())
-                
-                VStack {
-                    if isActive {
-                        Spacer()
-                        BuyModal(
-                            price: photos[selection].price,
-                            isActive: $isActive,
-                            showCompleteAlert: $showCompleteAlert,
-                            showFailModal: $showFailModal
-                        )
-                        .padding(.bottom, 50)
-                        .transition(.modal)
-                    }
-                    
-                    if showCompleteAlert {
-                        CompleteAlert()
-                            .transition(.alert)
-                            .onAppear {
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                                    withAnimation {
-                                        showCompleteAlert.toggle()
-                                    }
-                                }
-                            }
-                    }
-                    
-                    if showFailModal {
-                        FailModal(
-                            showFailModal: $showFailModal
-                        )
-                        .transition(.alert)
                     }
                 }
             }
-            .background(.black)
-            .edgesIgnoringSafeArea(.all)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .tabViewStyle(PageTabViewStyle())
+            
+            VStack {
+                if isActive {
+                    Spacer()
+                    BuyModal(
+                        price: photos[selection].price,
+                        isActive: $isActive,
+                        showCompleteAlert: $showCompleteAlert,
+                        showFailModal: $showFailModal
+                    )
+                    .padding(.bottom, 50)
+                    .transition(.modal)
+                }
+                
+                if showCompleteAlert {
+                    CompleteAlert()
+                        .transition(.alert)
+                        .onAppear {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                                withAnimation {
+                                    showCompleteAlert.toggle()
+                                }
+                            }
+                        }
+                }
+                
+                if showFailModal {
+                    FailModal(
+                        showFailModal: $showFailModal
+                    )
+                    .transition(.alert)
+                }
+            }
         }
+        .background(.black)
+        .edgesIgnoringSafeArea(.all)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 BackButton {
@@ -116,15 +111,14 @@ struct PhotoDisplayView: View {
 
 struct PhotoPageView: View {
     @Binding var photo: Image
-    @Binding var isLiked: Bool
     
     var body: some View {
         photo
             .resizable()
             .renderingMode(.original)
+            .aspectRatio(contentMode: .fill)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .edgesIgnoringSafeArea(.all)
-            .aspectRatio(contentMode: .fill)
     }
 }
 
