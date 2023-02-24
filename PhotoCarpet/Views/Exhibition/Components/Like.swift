@@ -19,7 +19,7 @@ struct Like: View {
             }
         } label: {
             Image(systemName: isLiked ? "heart.fill" : "heart")
-                .scaleEffect(isLiked ? 1.5 : 1)
+                .scaleEffect(isLiked ? 1.125 : 1.0)
                 .foregroundColor(isLiked ? .red : .black)
         }
     }
