@@ -157,12 +157,12 @@
 		13FD22F529A0F2AC0055013E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				13E938FA29A0D92400A6CA0B /* ContentView.swift */,
+				139162D529A2595000E6F80B /* Exhibition */,
+				6FB6F41C29A49DB70077C1BD /* Home */,
 				6F04099329A69BA9006CBE9E /* JH_Component */,
 				6F04098C29A69603006CBE9E /* Like */,
 				6F04098129A68694006CBE9E /* Search */,
-				6FB6F41C29A49DB70077C1BD /* Home */,
-				13E938FA29A0D92400A6CA0B /* ContentView.swift */,
-				139162D529A2595000E6F80B /* Exhibition */,
 			);
 			path = Views;
 			sourceTree = "<group>";

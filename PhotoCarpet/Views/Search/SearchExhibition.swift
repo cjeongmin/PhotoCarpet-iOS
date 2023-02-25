@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SearchExhibition: View {
+    @EnvironmentObject var exhibitionData: ExhibitionData
     @State private var offset: Int = 0
     @State private var limit: Int = 9
     
@@ -18,7 +19,10 @@ struct SearchExhibition: View {
             LazyVGrid(columns: columns) {
                 ForEach(0 ... (offset + 1) * 10, id: \.self) { index in
                     NavigationLink {
-                        Text("정민이가 만든 전시회 화면")
+                        ExhibitionMainView()
+                            .onAppear {
+                                exhibitionData.setDummyData()
+                            }
                     } label: {
                         ExhibitionItem()
                             .onAppear {
@@ -39,5 +43,6 @@ struct SearchExhibition: View {
 struct SearchExhibition_Previews: PreviewProvider {
     static var previews: some View {
         SearchExhibition()
+            .environmentObject(ExhibitionData())
     }
 }

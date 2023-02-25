@@ -21,8 +21,8 @@ struct MainHome: View {
                         .padding(.vertical, 10)
                         .listRowInsets(EdgeInsets())
 
-                    Button {
-                        print("Add Exhibition")
+                    NavigationLink {
+                        EnrollView(isEdit: .constant(false))
                     } label: {
                         Image(systemName: "plus.circle.fill")
                             .resizable()
@@ -44,6 +44,7 @@ struct MainHome: View {
 struct MainHome_Previews: PreviewProvider {
     static var previews: some View {
         MainHome()
+            .environmentObject(ExhibitionData())
     }
 }
 
