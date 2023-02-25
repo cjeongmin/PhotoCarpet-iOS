@@ -1,0 +1,68 @@
+{
+  "data": [
+    {
+      "exhibitId": 1,
+      "title": "코스 전시회1",
+      "content": "",
+      
+      "userInfo": {
+        "userId": 1,
+        "nickname": "송화백",
+        "profileUrl": "artist"
+      },
+      
+      "likeCount": 10,
+      "exhibitionDate": "2023-02-22",
+      "createDate": "2023-01-31",
+      "thumbUrl": "356-200x300"
+    },
+    {
+      "exhibitId": 1,
+      "title": "코스 전시회2",
+      "content": "",
+      
+      "userInfo": {
+        "userId": 2,
+        "nickname": "이화백",
+        "profileUrl": "artist"
+      },
+      
+      "likeCount": 9,
+      "exhibitionDate": "2023-02-22",
+      "createDate": "2023-01-31",
+      "thumbUrl": "509-200x300"
+    },
+    {
+      "exhibitId": 3,
+      "title": "코스 전시회3",
+      "content": "",
+      
+      "userInfo": {
+        "userId": 3,
+        "nickname": "김화백",
+        "profileUrl": "artist"
+      },
+      
+      "likeCount": 8,
+      "exhibitionDate": "2023-02-22",
+      "createDate": "2023-01-31",
+      "thumbUrl": "742-200x300"
+    },
+    {
+      "exhibitId": 4,
+      "title": "코스 전시회4",
+      "content": "",
+      
+      "userInfo": {
+        "userId": 4,
+        "nickname": "박화백",
+        "profileUrl": "artist"
+      },
+      
+      "likeCount": 7,
+      "exhibitionDate": "2023-02-22",
+      "createDate": "2023-01-31",
+      "thumbUrl": "789-300x300"
+    }
+  ]
+}

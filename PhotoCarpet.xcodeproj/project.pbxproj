@@ -12,6 +12,21 @@
 		13E938FD29A0D92500A6CA0B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13E938FC29A0D92500A6CA0B /* Assets.xcassets */; };
 		13E9390029A0D92500A6CA0B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13E938FF29A0D92500A6CA0B /* Preview Assets.xcassets */; };
 		13FD22F829A0F2CB0055013E /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FD22F729A0F2CB0055013E /* Model.swift */; };
+		6F04098329A686A4006CBE9E /* ArtistItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F04098229A686A4006CBE9E /* ArtistItem.swift */; };
+		6F04098529A686C0006CBE9E /* SearchHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F04098429A686C0006CBE9E /* SearchHome.swift */; };
+		6F04098729A686DE006CBE9E /* SearchExhibition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F04098629A686DE006CBE9E /* SearchExhibition.swift */; };
+		6F04098929A686F2006CBE9E /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F04098829A686F2006CBE9E /* SearchBar.swift */; };
+		6F04098B29A68706006CBE9E /* SearchArtist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F04098A29A68706006CBE9E /* SearchArtist.swift */; };
+		6F04098E29A6960F006CBE9E /* LikeHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F04098D29A6960F006CBE9E /* LikeHome.swift */; };
+		6F04099029A69AD8006CBE9E /* LikePhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F04098F29A69AD8006CBE9E /* LikePhoto.swift */; };
+		6F04099229A69B5D006CBE9E /* PhotoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F04099129A69B5D006CBE9E /* PhotoItem.swift */; };
+		6F04099529A69BDE006CBE9E /* ExhibitionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F04099429A69BDE006CBE9E /* ExhibitionInfo.swift */; };
+		6F04099729A69C40006CBE9E /* ArtistInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F04099629A69C40006CBE9E /* ArtistInfo.swift */; };
+		6F0E178F29A5636E0062C280 /* exhibitionData.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F0E178E29A5636E0062C280 /* exhibitionData.json */; };
+		6FB6F41E29A49DC10077C1BD /* MainHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB6F41D29A49DC10077C1BD /* MainHome.swift */; };
+		6FB6F42129A4AC160077C1BD /* ExhibitionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB6F42029A4AC160077C1BD /* ExhibitionRow.swift */; };
+		6FB6F42329A4ACC40077C1BD /* ExhibitionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB6F42229A4ACC40077C1BD /* ExhibitionItem.swift */; };
+		6FB6F42529A4BEC00077C1BD /* CustomNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB6F42429A4BEC00077C1BD /* CustomNavBarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +36,22 @@
 		13E938FC29A0D92500A6CA0B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		13E938FF29A0D92500A6CA0B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		13FD22F729A0F2CB0055013E /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		6F04098229A686A4006CBE9E /* ArtistItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistItem.swift; sourceTree = "<group>"; };
+		6F04098429A686C0006CBE9E /* SearchHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHome.swift; sourceTree = "<group>"; };
+		6F04098629A686DE006CBE9E /* SearchExhibition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchExhibition.swift; sourceTree = "<group>"; };
+		6F04098829A686F2006CBE9E /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		6F04098A29A68706006CBE9E /* SearchArtist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchArtist.swift; sourceTree = "<group>"; };
+		6F04098D29A6960F006CBE9E /* LikeHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeHome.swift; sourceTree = "<group>"; };
+		6F04098F29A69AD8006CBE9E /* LikePhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikePhoto.swift; sourceTree = "<group>"; };
+		6F04099129A69B5D006CBE9E /* PhotoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoItem.swift; sourceTree = "<group>"; };
+		6F04099429A69BDE006CBE9E /* ExhibitionInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExhibitionInfo.swift; sourceTree = "<group>"; };
+		6F04099629A69C40006CBE9E /* ArtistInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistInfo.swift; sourceTree = "<group>"; };
+		6F0E178B29A539600062C280 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		6F0E178E29A5636E0062C280 /* exhibitionData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = exhibitionData.json; sourceTree = "<group>"; };
+		6FB6F41D29A49DC10077C1BD /* MainHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHome.swift; sourceTree = "<group>"; };
+		6FB6F42029A4AC160077C1BD /* ExhibitionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExhibitionRow.swift; sourceTree = "<group>"; };
+		6FB6F42229A4ACC40077C1BD /* ExhibitionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExhibitionItem.swift; sourceTree = "<group>"; };
+		6FB6F42429A4BEC00077C1BD /* CustomNavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavBarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +84,7 @@
 		13E938F729A0D92400A6CA0B /* PhotoCarpet */ = {
 			isa = PBXGroup;
 			children = (
+				6F0E178B29A539600062C280 /* Info.plist */,
 				13E938F829A0D92400A6CA0B /* PhotoCarpetApp.swift */,
 				13FD22F529A0F2AC0055013E /* Views */,
 				13FD22F629A0F2BC0055013E /* Model */,
@@ -73,6 +105,10 @@
 		13FD22F529A0F2AC0055013E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				6F04099329A69BA9006CBE9E /* JH_Component */,
+				6F04098C29A69603006CBE9E /* Like */,
+				6F04098129A68694006CBE9E /* Search */,
+				6FB6F41C29A49DB70077C1BD /* Home */,
 				13E938FA29A0D92400A6CA0B /* ContentView.swift */,
 			);
 			path = Views;
@@ -82,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				13FD22F729A0F2CB0055013E /* Model.swift */,
+				6F0E178E29A5636E0062C280 /* exhibitionData.json */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -92,6 +129,48 @@
 				13E938FC29A0D92500A6CA0B /* Assets.xcassets */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		6F04098129A68694006CBE9E /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				6F04098229A686A4006CBE9E /* ArtistItem.swift */,
+				6F04098429A686C0006CBE9E /* SearchHome.swift */,
+				6F04098629A686DE006CBE9E /* SearchExhibition.swift */,
+				6F04098829A686F2006CBE9E /* SearchBar.swift */,
+				6F04098A29A68706006CBE9E /* SearchArtist.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		6F04098C29A69603006CBE9E /* Like */ = {
+			isa = PBXGroup;
+			children = (
+				6F04098D29A6960F006CBE9E /* LikeHome.swift */,
+				6F04098F29A69AD8006CBE9E /* LikePhoto.swift */,
+				6F04099129A69B5D006CBE9E /* PhotoItem.swift */,
+			);
+			path = Like;
+			sourceTree = "<group>";
+		};
+		6F04099329A69BA9006CBE9E /* JH_Component */ = {
+			isa = PBXGroup;
+			children = (
+				6F04099429A69BDE006CBE9E /* ExhibitionInfo.swift */,
+				6F04099629A69C40006CBE9E /* ArtistInfo.swift */,
+			);
+			path = JH_Component;
+			sourceTree = "<group>";
+		};
+		6FB6F41C29A49DB70077C1BD /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				6FB6F41D29A49DC10077C1BD /* MainHome.swift */,
+				6FB6F42029A4AC160077C1BD /* ExhibitionRow.swift */,
+				6FB6F42229A4ACC40077C1BD /* ExhibitionItem.swift */,
+				6FB6F42429A4BEC00077C1BD /* CustomNavBarView.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -152,6 +231,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F0E178F29A5636E0062C280 /* exhibitionData.json in Resources */,
 				13E9390029A0D92500A6CA0B /* Preview Assets.xcassets in Resources */,
 				13E938FD29A0D92500A6CA0B /* Assets.xcassets in Resources */,
 			);
@@ -164,9 +244,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F04098529A686C0006CBE9E /* SearchHome.swift in Sources */,
 				13FD22F829A0F2CB0055013E /* Model.swift in Sources */,
+				6F04098329A686A4006CBE9E /* ArtistItem.swift in Sources */,
+				6F04099029A69AD8006CBE9E /* LikePhoto.swift in Sources */,
+				6FB6F42129A4AC160077C1BD /* ExhibitionRow.swift in Sources */,
 				13E938FB29A0D92400A6CA0B /* ContentView.swift in Sources */,
+				6F04098E29A6960F006CBE9E /* LikeHome.swift in Sources */,
 				13E938F929A0D92400A6CA0B /* PhotoCarpetApp.swift in Sources */,
+				6F04099729A69C40006CBE9E /* ArtistInfo.swift in Sources */,
+				6FB6F42529A4BEC00077C1BD /* CustomNavBarView.swift in Sources */,
+				6FB6F41E29A49DC10077C1BD /* MainHome.swift in Sources */,
+				6F04098729A686DE006CBE9E /* SearchExhibition.swift in Sources */,
+				6F04099229A69B5D006CBE9E /* PhotoItem.swift in Sources */,
+				6F04098929A686F2006CBE9E /* SearchBar.swift in Sources */,
+				6F04098B29A68706006CBE9E /* SearchArtist.swift in Sources */,
+				6F04099529A69BDE006CBE9E /* ExhibitionInfo.swift in Sources */,
+				6FB6F42329A4ACC40077C1BD /* ExhibitionItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,9 +391,11 @@
 				DEVELOPMENT_ASSET_PATHS = "\"PhotoCarpet/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PhotoCarpet/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -325,9 +421,11 @@
 				DEVELOPMENT_ASSET_PATHS = "\"PhotoCarpet/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PhotoCarpet/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
