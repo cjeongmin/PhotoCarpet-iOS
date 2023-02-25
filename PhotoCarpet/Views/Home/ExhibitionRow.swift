@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ExhibitionRow: View {
+    @EnvironmentObject var exhibitionData: ExhibitionData
     var categoryName: String
 
     var body: some View {
@@ -20,7 +21,10 @@ struct ExhibitionRow: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 15) {
                     NavigationLink {
-                        Text("정민이가 만든 전시회 뷰 넣기")
+                        ExhibitionMainView()
+                            .onAppear {
+                                exhibitionData.setDummyData()
+                            }
                     } label: {
                         ExhibitionItem()
                     }
@@ -37,5 +41,6 @@ struct ExhibitionRow: View {
 struct ExhibitionRow_Previews: PreviewProvider {
     static var previews: some View {
         ExhibitionRow(categoryName: "Trend")
+            .environmentObject(ExhibitionData())
     }
 }
