@@ -31,4 +31,28 @@ struct Response: Codable {
         let profileUrl: String?
         let exhibitions: [Exhibition]?
     }
+
+    struct SocialUser: Codable {
+        let userId: Int
+        let nickname: String?
+        let email: String
+        let profileUrl: String?
+        let jwtToken: String
+        let accessToken: String
+        let profileMessage: String?
+        let validate_check: Bool?
+    }
+
+    struct SearchResult<T: Codable>: Codable {
+        let result: [T]
+        let error: String?
+    }
+
+    struct Photo: Codable {
+        let exhibitionId: Int
+        let photoId: Int
+        let artUrl: String
+        let price: Int
+        let soldOut: Bool
+    }
 }
