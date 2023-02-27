@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MainHome: View {
     var body: some View {
-        NavigationStack {
+        NavigationView {
             VStack(spacing: 0) {
                 CustomNavBarView()
 
@@ -38,6 +38,7 @@ struct MainHome: View {
             .toolbar(.hidden, for: .navigationBar)
             .background(Gradient(colors: [.black, .white]))
         } // NavView
+        .navigationViewStyle(.stack)
     }
 }
 

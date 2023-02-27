@@ -5,12 +5,13 @@
 //  Created by 최정민 on 2023/02/23.
 //
 
+import Alamofire
 import Foundation
 import SwiftUI
 
-
 final class ExhibitionData: ObservableObject {
     struct Photo {
+        var data: UIImage?
         var photo: Image?
         var price: String = "" {
             didSet {
@@ -24,20 +25,21 @@ final class ExhibitionData: ObservableObject {
                 }
             }
         }
+
         var isLiked: Bool = false
     }
     
     var userId: Int? // User Id 있으면, 다른 사람의 전시회
     
-    @Published var photo1: Photo = Photo()
-    @Published var photo2: Photo = Photo()
-    @Published var photo3: Photo = Photo()
-    @Published var photo4: Photo = Photo()
+    @Published var photo1: Photo = .init()
+    @Published var photo2: Photo = .init()
+    @Published var photo3: Photo = .init()
+    @Published var photo4: Photo = .init()
     
     @Published var title: String = ""
     @Published var description: String = ""
     @Published var rawHashTags: String = ""
-    @Published var date: Date = Date()
+    @Published var date: Date = .init()
     
     @Published var isLiked: Bool = false
     
@@ -58,16 +60,14 @@ final class ExhibitionData: ObservableObject {
     }
     
     var isFillData: Bool {
-        print(title, description, hashTags, photo1, photo2, photo3, photo4, separator: "\n\n")
-        
         return (
             !title.isEmpty &&
-            !description.isEmpty &&
-            hashTags.count > 0 &&
-            photo1.photo != nil && !photo1.price.isEmpty &&
-            photo2.photo != nil && !photo2.price.isEmpty &&
-            photo3.photo != nil && !photo3.price.isEmpty &&
-            photo4.photo != nil && !photo4.price.isEmpty
+                !description.isEmpty &&
+                hashTags.count > 0 &&
+                photo1.photo != nil && !photo1.price.isEmpty &&
+                photo2.photo != nil && !photo2.price.isEmpty &&
+                photo3.photo != nil && !photo3.price.isEmpty &&
+                photo4.photo != nil && !photo4.price.isEmpty
         )
     }
     
@@ -94,5 +94,40 @@ final class ExhibitionData: ObservableObject {
         rawHashTags = "#테스트 #태그1 #태그2 #iOS"
         date = Date()
         isLiked = true
+    }
+    
+    func createExhibition(_ exhibition: Request.Exhibition, completion: @escaping (_ statusCode: Int) -> Void) {
+        struct ExhibitionRequest: Codable {
+            let title: String
+            let content: String
+            let exhibitionDate: String
+            let userId: Int
+        }
+
+        let header: HTTPHeaders = [
+            "Content-Type": "multipart/form-data; boundary=Boundary-\(UUID().uuidString)",
+            //        "Authorization": "Bearer \(User.shared.jwtToken)",
+        ]
+
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSX"
+        let converted = formatter.string(from: exhibition.exhibitionDate)
+
+        AF.upload(multipartFormData: { multipartFormData in
+            if let data = try? JSONEncoder().encode(ExhibitionRequest(
+                title: exhibition.title,
+                content: exhibition.content,
+                exhibitionDate: converted,
+                userId: User.shared.userId
+            )) {
+                multipartFormData.append(data, withName: "exhibitionRequest", mimeType: "application/json")
+            }
+            if let image = exhibition.photo.jpegData(compressionQuality: 1) {
+                multipartFormData.append(image, withName: "file", fileName: "\(image).jpeg", mimeType: "image/jpeg")
+            }
+        }, to: Request.baseURL + "/exhibition/create", usingThreshold: UInt64(), method: .post, headers: header).response { response in
+            guard let statusCode = response.response?.statusCode, statusCode == 200 else { return }
+            completion(statusCode)
+        }
     }
 }

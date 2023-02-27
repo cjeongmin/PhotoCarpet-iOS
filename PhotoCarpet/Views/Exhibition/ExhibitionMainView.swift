@@ -23,7 +23,7 @@ struct ExhibitionMainView: View {
                 
                 Group {
                     Text(exhibitionData.title)
-                        .lineLimit(1...4)
+                        .lineLimit(1 ... 4)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .font(.system(size: 42, weight: .black))
                         .foregroundColor(.white)
@@ -60,7 +60,6 @@ struct ExhibitionMainView: View {
                     }
                 }
                 .padding([.leading, .trailing], 30)
-                
                 
                 Spacer()
                 

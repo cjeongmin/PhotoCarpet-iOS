@@ -16,7 +16,6 @@ struct EnrollView: View {
         ZStack {
             Color.clear
             VStack(alignment: .leading) {
-                
                 VStack(alignment: .leading) {
                     Text("작품 선택")
                         .font(.system(size: 22))
@@ -25,7 +24,7 @@ struct EnrollView: View {
                         .font(.system(size: 14))
                 }
                 .padding(.top)
-                
+                    
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 12) {
                         ImageSelector(photo: $exhibitionData.photo1)
@@ -34,13 +33,13 @@ struct EnrollView: View {
                         ImageSelector(photo: $exhibitionData.photo4)
                     }
                 }
-                
+                    
                 CustomTextField(title: "전시회 제목", placeholder: "전시회 제목을 입력해주세요", text: $exhibitionData.title)
-                
+                    
                 CustomTextField(title: "간단한 설명", placeholder: "설명을 입력해주세요", text: $exhibitionData.description)
-                
+                    
                 CustomTextField(title: "해시태그", placeholder: "#태그1 #태그2", text: $exhibitionData.rawHashTags)
-                
+                    
                 VStack(alignment: .leading) {
                     Text("전시회 마감일")
                     VStack {
@@ -49,19 +48,15 @@ struct EnrollView: View {
                             .labelsHidden()
                     }
                 }.padding(.top)
-                
+                    
                 Spacer()
                 Spacer()
                 Spacer()
-                
+                    
                 if exhibitionData.isFillData {
                     if !isEdit {
-                        NavigationLink() {
+                        NavigationLink {
                             ExhibitionMainView()
-                                .onAppear {
-                                    // TODO: 전시회 등록 API 호출
-                                    exhibitionData.userId = User.shared.userId
-                                }
                         } label: {
                             Text("전시회 등록하기")
                                 .frame(maxWidth: .infinity, alignment: .center)
@@ -72,6 +67,19 @@ struct EnrollView: View {
                                 .cornerRadius(10)
                                 .padding(.trailing, 28)
                         }
+                        .simultaneousGesture(TapGesture().onEnded {
+                            exhibitionData.userId = User.shared.userId
+                            createExhibition(
+                                Request.Exhibition(
+                                    title: exhibitionData.title,
+                                    content: exhibitionData.description,
+                                    exhibitionDate: exhibitionData.date,
+                                    userId: User.shared.userId,
+                                    customMoods: exhibitionData.hashTags,
+                                    photo: exhibitionData.photo1.data!
+                                )
+                            )
+                        })
                     } else {
                         Button {
                             dismissAction.callAsFunction()
