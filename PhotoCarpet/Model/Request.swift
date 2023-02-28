@@ -10,6 +10,7 @@ import SwiftUI
 
 struct Request {
     static let baseURL = "http://localhost:8080"
+    static let dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSX"
 
     struct Exhibition {
         let title: String

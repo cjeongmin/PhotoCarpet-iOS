@@ -23,7 +23,7 @@ func createExhibition(_ exhibition: Request.Exhibition) {
     ]
 
     let formatter = DateFormatter()
-    formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSX"
+    formatter.dateFormat = Request.dateFormat
     let converted = formatter.string(from: exhibition.exhibitionDate)
 
     AF.upload(multipartFormData: { multipartFormData in
