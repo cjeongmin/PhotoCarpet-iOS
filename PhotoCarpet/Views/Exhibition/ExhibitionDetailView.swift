@@ -26,14 +26,28 @@ struct ExhibitionDetailView: View {
                     .font(.system(size: 35, weight: .bold))
                     .frame(maxWidth: .infinity, alignment: .leading)
                 Spacer()
-                Like(isLiked: $isLiked) {}
+                Like(isLiked: $isLiked) {
+                    if isLiked {
+                        dislikeExhibition(exhibition.exhibitId) {
+                            withAnimation {
+                                isLiked.toggle()
+                            }
+                        }
+                    } else {
+                        likeExhibition(exhibition.exhibitId) {
+                            withAnimation {
+                                isLiked.toggle()
+                            }
+                        }
+                    }
+                }
             }
             HStack {
                 Circle()
                     .frame(width: 40, height: 40)
                     .foregroundColor(Color(0xf5f5f5))
 
-                Text(exhibition.user.nickName ?? "unknown")
+                Text(exhibition.user?.nickName ?? "unknown")
             }
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 5) {

@@ -99,3 +99,29 @@ func uploadPhoto(_ photo: Request.Photo) {
         }
     }
 }
+
+func likeExhibition(_ exhibitionId: Int, completion: @escaping () -> Void) {
+    AF.request(
+        Request.baseURL + "/like/\(User.shared.userId)/\(exhibitionId)",
+        method: .post
+    ).response { response in
+        guard let statusCode = response.response?.statusCode, statusCode == 200 else {
+            debugPrint(response.response?.statusCode)
+            return
+        }
+        completion()
+    }
+}
+
+func dislikeExhibition(_ exhibitionId: Int, completion: @escaping () -> Void) {
+    AF.request(
+        Request.baseURL + "/dislike/\(User.shared.userId)/\(exhibitionId)",
+        method: .delete
+    ).response { response in
+        guard let statusCode = response.response?.statusCode, statusCode == 200 else {
+            debugPrint(response.response?.statusCode)
+            return
+        }
+        completion()
+    }
+}

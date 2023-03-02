@@ -22,8 +22,9 @@ final class ExhibitionRowViewModel: ObservableObject {
     // 이를 해결하는 방법은 콜백함수를 사용하거나, 세마포어나 뮤텍스와 같은 동기화 도구를 사용하는 방법도 있을 것 같다.
     // 준호형 보고있지..? - from 정민
     func requestExhibitions(_ type: RequestType) {
-        AF.request(Request.baseURL + "/exhibition/" + type.rawValue)
+        AF.request(Request.baseURL + "/exhibition/\(User.shared.userId)/likeExhibitions")
             .response { response in
+                var likeExhibtions: [Response.Exhibition] = []
                 if let data = response.data {
                     let formatter = DateFormatter()
                     let decoder: JSONDecoder = {
@@ -44,11 +45,60 @@ final class ExhibitionRowViewModel: ObservableObject {
 
                     do {
                         let result = try decoder.decode([Response.Exhibition].self, from: data)
-                        self.exhibitions = result
+                        likeExhibtions = result
                     } catch {
                         debugPrint(String(describing: error))
                     }
                 }
+
+                AF.request(Request.baseURL + "/exhibition/" + type.rawValue)
+                    .response { response in
+                        if let data = response.data {
+                            let formatter = DateFormatter()
+                            let decoder: JSONDecoder = {
+                                let decoder = JSONDecoder()
+                                decoder.dateDecodingStrategy = .custom { decoder in
+                                    let container = try decoder.singleValueContainer()
+                                    let dateString = try container.decode(String.self)
+
+                                    formatter.dateFormat = Request.dateFormat
+                                    if let date = formatter.date(from: dateString) {
+                                        return date
+                                    }
+
+                                    throw DecodingError.dataCorruptedError(in: container, debugDescription: "Cannot decode date string \(dateString)")
+                                }
+                                return decoder
+                            }()
+
+                            do {
+                                var result = try decoder.decode([Response.Exhibition].self, from: data)
+
+                                for index in 0 ..< result.count {
+                                    for likeExhibtion in likeExhibtions {
+                                        if result[index].exhibitId == likeExhibtion.exhibitId {
+                                            let exhibition = result[index]
+                                            result[index] = Response.Exhibition(
+                                                exhibitId: exhibition.exhibitId,
+                                                title: exhibition.title,
+                                                content: exhibition.content,
+                                                likeCount: exhibition.likeCount,
+                                                exhibitionDate: exhibition.exhibitionDate,
+                                                thumbUrl: exhibition.thumbUrl,
+                                                user: exhibition.user,
+                                                moodContents: exhibition.moodContents,
+                                                liked: true)
+                                            break
+                                        }
+                                    }
+                                }
+
+                                self.exhibitions = result
+                            } catch {
+                                debugPrint(String(describing: error))
+                            }
+                        }
+                    }
             }
     }
 }

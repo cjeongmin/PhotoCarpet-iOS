@@ -26,6 +26,9 @@ struct ExhibitionItem: View {
                             .cornerRadius(5)
                     } else if phase.error != nil {
                         Image(systemName: "wifi.slash")
+                            .onAppear {
+                                debugPrint(phase.error)
+                            }
                     } else {
                         ProgressView()
                     }

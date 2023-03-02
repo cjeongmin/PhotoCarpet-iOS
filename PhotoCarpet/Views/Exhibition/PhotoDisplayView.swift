@@ -93,7 +93,7 @@ struct PhotoDisplayView: View {
                 }
             }
 
-            if exhibition.user.nickName != User.shared.nickName {
+            if exhibition.user?.nickName != User.shared.nickName {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     Button {
                         withAnimation(.easeOut(duration: 0.5)) {

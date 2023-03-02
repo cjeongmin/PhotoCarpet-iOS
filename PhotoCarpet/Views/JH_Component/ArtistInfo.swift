@@ -16,8 +16,8 @@ struct ArtistInfo: View {
 
     var body: some View {
         HStack {
-            if exhibition.user.profilUrl != nil {
-                AsyncImage(url: URL(string: exhibition.user.profilUrl!)) { phase in
+            if exhibition.user?.profilUrl != nil {
+                AsyncImage(url: URL(string: exhibition.user?.profilUrl ?? "https://randomuser.me/api/portraits/lego/1.jpg")) { phase in
                     if let image = phase.image {
                         image
                             .renderingMode(.original)
@@ -44,7 +44,7 @@ struct ArtistInfo: View {
                     .backgroundStyle(.white)
             }
 
-            Text(exhibition.user.nickName!)
+            Text(exhibition.user?.nickName ?? "unknown")
                 .foregroundColor(.white)
                 .font(.system(size: 12, weight: .bold))
         } // HStack

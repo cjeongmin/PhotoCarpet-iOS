@@ -49,7 +49,6 @@ struct ExhibitionMainView: View {
     @ObservedObject var photoDisplayViewModel = PhotoDisplayViewModel()
 
     var exhibition: Response.Exhibition
-
     init(_ exhibition: Response.Exhibition) {
         self.exhibition = exhibition
     }
@@ -91,7 +90,7 @@ struct ExhibitionMainView: View {
                             photoDisplayViewModel.requestPhotos(exhibitionId: exhibition.exhibitId)
                         })
 
-                        if exhibition.user.nickName != User.shared.nickName {
+                        if exhibition.user?.nickName != User.shared.nickName {
                             NavigationLink {
                                 // TODO: 아티스트 정보 이동
                             } label: {
@@ -151,7 +150,7 @@ struct ExhibitionMainView: View {
                 }
             }
 
-            if exhibition.user.nickName == User.shared.nickName {
+            if exhibition.user?.nickName == User.shared.nickName {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink {
                         EnrollView(isEdit: .constant(true))
@@ -165,9 +164,26 @@ struct ExhibitionMainView: View {
             } else {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Like(isLiked: $isLiked) {
-                        // TODO: 전시회 좋아요 API 호출
+                        if isLiked {
+                            dislikeExhibition(exhibition.exhibitId) {
+                                withAnimation {
+                                    isLiked.toggle()
+                                }
+                            }
+                        } else {
+                            likeExhibition(exhibition.exhibitId) {
+                                withAnimation {
+                                    isLiked.toggle()
+                                }
+                            }
+                        }
                     }
                     .padding(.trailing)
+                    .onAppear {
+                        if exhibition.liked != nil {
+                            isLiked = true
+                        }
+                    }
                 }
             }
         }
