@@ -11,6 +11,7 @@ struct EnrollView: View {
     @Environment(\.dismiss) var dismissAction
     @EnvironmentObject var exhibitionData: ExhibitionData
     @Binding var isEdit: Bool
+    @State var isActive: Bool = false
     
     var body: some View {
         ZStack {
@@ -55,19 +56,15 @@ struct EnrollView: View {
                     
                 if exhibitionData.isFillData {
                     if !isEdit {
-                        NavigationLink {
-                            ExhibitionMainView()
+                        NavigationLink(isActive: $isActive) {
+                            if let response = exhibitionData.responseExhibition {
+                                ExhibitionMainView(response)
+                            }
                         } label: {
-                            Text("전시회 등록하기")
-                                .frame(maxWidth: .infinity, alignment: .center)
-                                .font(.system(size: 18).bold())
-                                .foregroundColor(.white)
-                                .frame(maxWidth: .infinity, minHeight: 50)
-                                .background(Color(.black))
-                                .cornerRadius(10)
-                                .padding(.trailing, 28)
+                            EmptyView()
                         }
-                        .simultaneousGesture(TapGesture().onEnded {
+
+                        Button {
                             exhibitionData.userId = User.shared.userId
                             createExhibition(
                                 Request.Exhibition(
@@ -78,8 +75,53 @@ struct EnrollView: View {
                                     customMoods: exhibitionData.hashTags,
                                     photo: exhibitionData.photo1.data!
                                 )
-                            )
-                        })
+                            ) { exhibition in
+                                exhibitionData.responseExhibition = exhibition
+                                uploadPhoto(
+                                    Request.Photo(
+                                        exhibitionId: exhibition.exhibitId,
+                                        soldOut: false,
+                                        price: Int(exhibitionData.photo1.price)!,
+                                        photo: exhibitionData.photo1.data!
+                                    )
+                                )
+                                uploadPhoto(
+                                    Request.Photo(
+                                        exhibitionId: exhibition.exhibitId,
+                                        soldOut: false,
+                                        price: Int(exhibitionData.photo2.price)!,
+                                        photo: exhibitionData.photo2.data!
+                                    )
+                                )
+                                uploadPhoto(
+                                    Request.Photo(
+                                        exhibitionId: exhibition.exhibitId,
+                                        soldOut: false,
+                                        price: Int(exhibitionData.photo3.price)!,
+                                        photo: exhibitionData.photo3.data!
+                                    )
+                                )
+                                uploadPhoto(
+                                    Request.Photo(
+                                        exhibitionId: exhibition.exhibitId,
+                                        soldOut: false,
+                                        price: Int(exhibitionData.photo4.price)!,
+                                        photo: exhibitionData.photo4.data!
+                                    )
+                                )
+                                isActive.toggle()
+                            }
+                        }
+                        label: {
+                            Text("전시회 등록하기")
+                                .frame(maxWidth: .infinity, alignment: .center)
+                                .font(.system(size: 18).bold())
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity, minHeight: 50)
+                                .background(Color(.black))
+                                .cornerRadius(10)
+                                .padding(.trailing, 28)
+                        }
                     } else {
                         Button {
                             dismissAction.callAsFunction()

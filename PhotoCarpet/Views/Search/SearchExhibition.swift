@@ -11,7 +11,7 @@ struct SearchExhibition: View {
     @EnvironmentObject var exhibitionData: ExhibitionData
     @State private var offset: Int = 0
     @State private var limit: Int = 9
-    
+
     var columns: [GridItem] = Array(repeating: .init(.flexible()), count: 2)
 
     var body: some View {
@@ -19,18 +19,18 @@ struct SearchExhibition: View {
             LazyVGrid(columns: columns) {
                 ForEach(0 ... (offset + 1) * 10, id: \.self) { index in
                     NavigationLink {
-                        ExhibitionMainView()
-                            .onAppear {
-                                exhibitionData.setDummyData()
-                            }
+//                        ExhibitionMainView()
+//                            .onAppear {
+//                                exhibitionData.setDummyData()
+//                            }
                     } label: {
-                        ExhibitionItem()
-                            .onAppear {
-                                if index % (limit + 1) == limit {
-                                    offset += 1
-                                }
-                            }
-                            .padding(.vertical, 10)
+//                        ExhibitionItem()
+//                            .onAppear {
+//                                if index % (limit + 1) == limit {
+//                                    offset += 1
+//                                }
+//                            }
+//                            .padding(.vertical, 10)
                     }
                 }
             }

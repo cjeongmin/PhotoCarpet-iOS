@@ -5,6 +5,7 @@
 //  Created by 최정민 on 2023/02/22.
 //
 
+import Alamofire
 import SwiftUI
 
 extension AnyTransition {
@@ -14,7 +15,7 @@ extension AnyTransition {
             removal: .push(from: .top).combined(with: .opacity)
         )
     }
-    
+
     static var alert: AnyTransition {
         .asymmetric(
             insertion: .push(from: .top),
@@ -25,31 +26,35 @@ extension AnyTransition {
 
 struct PhotoDisplayView: View {
     @Environment(\.dismiss) var dismissAction
-    @EnvironmentObject var exhibitionData: ExhibitionData
+    var exhibition: Response.Exhibition
     @State private var selection = 0
     @State private var isActive = false
     @State private var showCompleteAlert = false
     @State private var showFailModal = false
-    
+
+    @EnvironmentObject private var viewModel: PhotoDisplayViewModel
+
+    init(exhibition: Response.Exhibition) {
+        self.exhibition = exhibition
+    }
+
     var body: some View {
-        let photos = [$exhibitionData.photo1, $exhibitionData.photo2, $exhibitionData.photo3, $exhibitionData.photo4]
-        
         return ZStack {
             TabView(selection: $selection) {
-                ForEach(photos.indices, id: \.self) { index in
-                    if let photo = photos[index].photo.wrappedValue {
+                ForEach(viewModel.photoData.indices, id: \.self) { index in
+                    if let photo = viewModel.photoData[index] {
                         PhotoPageView(photo: .constant(photo))
                             .tag(index)
                     }
                 }
             }
             .tabViewStyle(PageTabViewStyle())
-            
+
             VStack {
                 if isActive {
                     Spacer()
                     BuyModal(
-                        price: photos[selection].price,
+                        price: String(viewModel.photos[selection].price),
                         isActive: $isActive,
                         showCompleteAlert: $showCompleteAlert,
                         showFailModal: $showFailModal
@@ -57,7 +62,7 @@ struct PhotoDisplayView: View {
                     .padding(.bottom, 50)
                     .transition(.modal)
                 }
-                
+
                 if showCompleteAlert {
                     CompleteAlert()
                         .transition(.alert)
@@ -69,7 +74,7 @@ struct PhotoDisplayView: View {
                             }
                         }
                 }
-                
+
                 if showFailModal {
                     FailModal(
                         showFailModal: $showFailModal
@@ -87,8 +92,8 @@ struct PhotoDisplayView: View {
                     dismissAction.callAsFunction()
                 }
             }
-            
-            if exhibitionData.userId != User.shared.userId {
+
+            if exhibition.user.nickName != User.shared.nickName {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     Button {
                         withAnimation(.easeOut(duration: 0.5)) {
@@ -99,9 +104,10 @@ struct PhotoDisplayView: View {
                             .scaleEffect(1.25)
                             .foregroundColor(.black)
                     }
-                    Like(isLiked: photos[selection].isLiked) {
-                        // TODO: 전시물 좋아요 API 호출
-                    }
+//                    // TODO: 데이터에 좋아요 여부를 확인할 수 있어야 함.
+//                    Like(isLiked: photoData[selection].) {
+//                        // TODO: 전시물 좋아요 API 호출
+//                    }
                 }
             }
         }
@@ -109,9 +115,14 @@ struct PhotoDisplayView: View {
     }
 }
 
+// TODO: 사진 업로드 추가 (exhibitionId 필요, 개선되면)
+// TODO: 수정 기능 추가
+// TODO: 전시물, 전시회 좋아요 API 추가
+// TODO: 전시회 태그 받아와지는지 확인
+
 struct PhotoPageView: View {
     @Binding var photo: Image
-    
+
     var body: some View {
         photo
             .resizable()
@@ -124,9 +135,10 @@ struct PhotoPageView: View {
 
 struct PhotoDisplayView_Previews: PreviewProvider {
     static var previews: some View {
-        let data = ExhibitionData()
-        data.setDummyData()
-        return PhotoDisplayView()
-            .environmentObject(data)
+        EmptyView()
+//        let data = ExhibitionData()
+//        data.setDummyData()
+//        return PhotoDisplayView()
+//            .environmentObject(data)
     }
 }

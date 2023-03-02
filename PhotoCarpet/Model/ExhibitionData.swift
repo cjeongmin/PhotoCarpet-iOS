@@ -41,7 +41,7 @@ final class ExhibitionData: ObservableObject {
     @Published var rawHashTags: String = ""
     @Published var date: Date = .init()
     
-    @Published var isLiked: Bool = false
+    var responseExhibition: Response.Exhibition?
     
     var hashTags: [String] {
         var hashTags: [String] = []
@@ -80,7 +80,6 @@ final class ExhibitionData: ObservableObject {
         description = ""
         rawHashTags = ""
         date = Date()
-        isLiked = false
     }
     
     func setDummyData() {
@@ -93,41 +92,5 @@ final class ExhibitionData: ObservableObject {
         description = "테스트용 더미 데이터입니다."
         rawHashTags = "#테스트 #태그1 #태그2 #iOS"
         date = Date()
-        isLiked = true
-    }
-    
-    func createExhibition(_ exhibition: Request.Exhibition, completion: @escaping (_ statusCode: Int) -> Void) {
-        struct ExhibitionRequest: Codable {
-            let title: String
-            let content: String
-            let exhibitionDate: String
-            let userId: Int
-        }
-
-        let header: HTTPHeaders = [
-            "Content-Type": "multipart/form-data; boundary=Boundary-\(UUID().uuidString)",
-            //        "Authorization": "Bearer \(User.shared.jwtToken)",
-        ]
-
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSX"
-        let converted = formatter.string(from: exhibition.exhibitionDate)
-
-        AF.upload(multipartFormData: { multipartFormData in
-            if let data = try? JSONEncoder().encode(ExhibitionRequest(
-                title: exhibition.title,
-                content: exhibition.content,
-                exhibitionDate: converted,
-                userId: User.shared.userId
-            )) {
-                multipartFormData.append(data, withName: "exhibitionRequest", mimeType: "application/json")
-            }
-            if let image = exhibition.photo.jpegData(compressionQuality: 1) {
-                multipartFormData.append(image, withName: "file", fileName: "\(image).jpeg", mimeType: "image/jpeg")
-            }
-        }, to: Request.baseURL + "/exhibition/create", usingThreshold: UInt64(), method: .post, headers: header).response { response in
-            guard let statusCode = response.response?.statusCode, statusCode == 200 else { return }
-            completion(statusCode)
-        }
     }
 }

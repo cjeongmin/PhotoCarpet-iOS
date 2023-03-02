@@ -20,4 +20,11 @@ struct Request {
         let customMoods: [String]
         let photo: UIImage
     }
+
+    struct Photo {
+        let exhibitionId: Int
+        let soldOut: Bool
+        let price: Int
+        let photo: UIImage
+    }
 }

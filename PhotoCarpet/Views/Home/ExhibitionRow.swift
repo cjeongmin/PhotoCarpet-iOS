@@ -12,16 +12,15 @@ import SwiftUI
 final class ExhibitionRowViewModel: ObservableObject {
     @Published var exhibitions: [Response.Exhibition] = []
 
-    // ViewModel 외부에서 함수를 만들어 이를 호출했을 때, API 요청이 비동기로 작동하고, 기존 함수에는 반환값을 넘겨주는 형식이였으나
-    // 비동기로 작동하는 특성때문에 ViewModel 안의 프로퍼티에 접근해서 변경하는 방식으로 바꿈
-    // 이를 해결하는 방법은 콜백함수를 사용하거나, 세마포어나 뮤텍스와 같은 동기화 도구를 사용하는 방법도 있을 것 같다.
-    // 준호형 보고있지..? - from 정민
-
     enum RequestType: String {
         case recent
         case trend = "morelike"
     }
 
+    // ViewModel 외부에서 함수를 만들어 이를 호출했을 때, API 요청이 비동기로 작동하고, 기존 함수에는 반환값을 넘겨주는 형식이였으나
+    // 비동기로 작동하는 특성때문에 ViewModel 안의 프로퍼티에 접근해서 변경하는 방식으로 바꿈
+    // 이를 해결하는 방법은 콜백함수를 사용하거나, 세마포어나 뮤텍스와 같은 동기화 도구를 사용하는 방법도 있을 것 같다.
+    // 준호형 보고있지..? - from 정민
     func requestExhibitions(_ type: RequestType) {
         AF.request(Request.baseURL + "/exhibition/" + type.rawValue)
             .response { response in
@@ -47,7 +46,7 @@ final class ExhibitionRowViewModel: ObservableObject {
                         let result = try decoder.decode([Response.Exhibition].self, from: data)
                         self.exhibitions = result
                     } catch {
-                        print(String(describing: error))
+                        debugPrint(String(describing: error))
                     }
                 }
             }
@@ -68,11 +67,11 @@ struct ExhibitionRow: View {
 
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 15) {
-                    ForEach(viewModel.exhibitions.indices, id: \.self) { _ in
+                    ForEach(viewModel.exhibitions.indices, id: \.self) { index in
                         NavigationLink {
-                            ExhibitionMainView()
+                            ExhibitionMainView(viewModel.exhibitions[index])
                         } label: {
-                            ExhibitionItem()
+                            ExhibitionItem(viewModel.exhibitions[index])
                         }
                     }
                 }
