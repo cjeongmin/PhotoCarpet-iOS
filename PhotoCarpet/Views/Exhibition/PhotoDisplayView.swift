@@ -115,9 +115,6 @@ struct PhotoDisplayView: View {
     }
 }
 
-// TODO: 수정 기능 추가
-// TODO: 전시회 태그 받아와지는지 확인
-
 struct PhotoPageView: View {
     @Binding var photo: Image
 
@@ -128,11 +125,5 @@ struct PhotoPageView: View {
             .aspectRatio(contentMode: .fill)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .edgesIgnoringSafeArea(.all)
-    }
-}
-
-struct PhotoDisplayView_Previews: PreviewProvider {
-    static var previews: some View {
-        EmptyView()
     }
 }

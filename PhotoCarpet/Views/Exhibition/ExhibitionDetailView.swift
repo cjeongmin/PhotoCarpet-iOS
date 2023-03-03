@@ -52,9 +52,9 @@ struct ExhibitionDetailView: View {
             }
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 5) {
-//                    ForEach(Binding.constant(exhibition.moodContents), id: \.self) { tag in
-//                        Tag(tag: tag)
-//                    }
+                    ForEach(Binding.constant(exhibition.moodContents ?? []), id: \.self) { tag in
+                        Tag(tag: tag)
+                    }
                 }
             }.padding([.top, .bottom], 20)
             Text(exhibition.content!)

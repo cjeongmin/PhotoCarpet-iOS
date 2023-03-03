@@ -74,26 +74,76 @@ final class ExhibitionRowViewModel: ObservableObject {
                             do {
                                 var result = try decoder.decode([Response.Exhibition].self, from: data)
 
-                                for index in 0 ..< result.count {
-                                    for likeExhibtion in likeExhibtions {
-                                        if result[index].exhibitId == likeExhibtion.exhibitId {
-                                            let exhibition = result[index]
-                                            result[index] = Response.Exhibition(
-                                                exhibitId: exhibition.exhibitId,
-                                                title: exhibition.title,
-                                                content: exhibition.content,
-                                                likeCount: exhibition.likeCount,
-                                                exhibitionDate: exhibition.exhibitionDate,
-                                                thumbUrl: exhibition.thumbUrl,
-                                                user: exhibition.user,
-                                                moodContents: exhibition.moodContents,
-                                                liked: true)
-                                            break
-                                        }
+                                var hashtags: [Int: [String]] = [:]
+                                let queue = DispatchQueue(label: "get_tags", attributes: .concurrent)
+                                let group = DispatchGroup()
+
+                                queue.async(group: group) {
+                                    for index in 0 ..< result.count {
+                                        group.enter()
+                                        AF.request(Request.baseURL + "/exhibition/withhashtag/\(result[index].exhibitId)")
+                                            .response(queue: queue) { response in
+                                                if let data = response.data {
+                                                    let formatter = DateFormatter()
+                                                    let decoder: JSONDecoder = {
+                                                        let decoder = JSONDecoder()
+                                                        decoder.dateDecodingStrategy = .custom { decoder in
+                                                            let container = try decoder.singleValueContainer()
+                                                            let dateString = try container.decode(String.self)
+
+                                                            formatter.dateFormat = Request.dateFormat
+                                                            if let date = formatter.date(from: dateString) {
+                                                                return date
+                                                            }
+
+                                                            throw DecodingError.dataCorruptedError(in: container, debugDescription: "Cannot decode date string \(dateString)")
+                                                        }
+                                                        return decoder
+                                                    }()
+
+                                                    do {
+                                                        let exhibition = try decoder.decode(Response.Exhibition.self, from: data)
+                                                        hashtags[index] = exhibition.moodContents ?? []
+                                                    } catch {
+                                                        debugPrint(String(describing: error))
+                                                    }
+                                                }
+                                                group.leave()
+                                            }
                                     }
                                 }
 
-                                self.exhibitions = result
+                                group.notify(queue: .main) {
+                                    for index in 0 ..< result.count {
+                                        let exhibition = result[index]
+                                        result[index] = Response.Exhibition(
+                                            exhibitId: exhibition.exhibitId,
+                                            title: exhibition.title,
+                                            content: exhibition.content,
+                                            likeCount: exhibition.likeCount,
+                                            exhibitionDate: exhibition.exhibitionDate,
+                                            thumbUrl: exhibition.thumbUrl,
+                                            user: exhibition.user,
+                                            moodContents: hashtags[index] ?? [],
+                                            liked: false)
+                                        for likeExhibtion in likeExhibtions {
+                                            if result[index].exhibitId == likeExhibtion.exhibitId {
+                                                result[index] = Response.Exhibition(
+                                                    exhibitId: exhibition.exhibitId,
+                                                    title: exhibition.title,
+                                                    content: exhibition.content,
+                                                    likeCount: exhibition.likeCount,
+                                                    exhibitionDate: exhibition.exhibitionDate,
+                                                    thumbUrl: exhibition.thumbUrl,
+                                                    user: exhibition.user,
+                                                    moodContents: hashtags[index] ?? [],
+                                                    liked: true)
+                                                break
+                                            }
+                                        }
+                                    }
+                                    self.exhibitions = result
+                                }
                             } catch {
                                 debugPrint(String(describing: error))
                             }
