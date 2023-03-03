@@ -9,31 +9,46 @@ import Alamofire
 import SwiftUI
 
 final class PhotoDisplayViewModel: ObservableObject {
-    @Published var photos: [Response.Photo] = []
-    var photoData: [Image] = []
+    @Published var photos: [(photoData: Response.Photo, photo: UIImage, isLiked: Bool)] = []
 
     func requestPhotos(exhibitionId: Int) {
         AF.request(Request.baseURL + "/photo/\(exhibitionId)").responseDecodable(of: [Response.Photo].self) { response in
             guard let result = response.value else { return }
-            self.photos = result
 
-            var alt: [Image] = []
-            let semaphore = DispatchSemaphore(value: 0)
-            for photo in self.photos {
-                if let url = URL(string: photo.artUrl) {
-                    let task = URLSession.shared.dataTask(with: url) { data, response, error in
-                        if let data = try? Data(contentsOf: url) {
-                            if let uiImage = UIImage(data: data) {
-                                alt.append(Image(uiImage: uiImage))
+            let queue = DispatchQueue(label: "request_photos")
+            let group = DispatchGroup()
+
+            queue.async(group: group) {
+                for photo in result {
+                    group.enter()
+                    AF.download(photo.artUrl).responseData(queue: queue) { response in
+                        if let data = response.value {
+                            if let image = UIImage(data: data) {
+                                DispatchQueue.main.async {
+                                    self.photos.append(
+                                        (photoData: photo, photo: image, isLiked: false)
+                                    )
+                                }
                             }
                         }
-                        semaphore.signal()
+                        group.leave()
                     }
-                    task.resume()
                 }
-                semaphore.wait()
             }
-            self.photoData = alt
+
+            group.notify(queue: queue) {
+                AF.request(Request.baseURL + "/photo/\(User.shared.userId)/likePhotos")
+                    .responseDecodable(of: [Response.Photo].self, queue: queue) { response in
+                        guard let data = response.value else { return }
+                        for photo in data {
+                            if let idx = self.photos.firstIndex(where: { $0.photoData.photoId == photo.photoId }) {
+                                DispatchQueue.main.async {
+                                    self.photos[idx].isLiked = true
+                                }
+                            }
+                        }
+                    }
+            }
         }
     }
 }

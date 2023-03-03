@@ -41,11 +41,9 @@ struct PhotoDisplayView: View {
     var body: some View {
         return ZStack {
             TabView(selection: $selection) {
-                ForEach(viewModel.photoData.indices, id: \.self) { index in
-                    if let photo = viewModel.photoData[index] {
-                        PhotoPageView(photo: .constant(photo))
-                            .tag(index)
-                    }
+                ForEach(viewModel.photos.indices, id: \.self) { index in
+                    PhotoPageView(photo: Image(uiImage: viewModel.photos[index].photo))
+                        .tag(index)
                 }
             }
             .tabViewStyle(PageTabViewStyle())
@@ -54,7 +52,7 @@ struct PhotoDisplayView: View {
                 if isActive {
                     Spacer()
                     BuyModal(
-                        price: String(viewModel.photos[selection].price),
+                        price: String(viewModel.photos[selection].photoData.price),
                         isActive: $isActive,
                         showCompleteAlert: $showCompleteAlert,
                         showFailModal: $showFailModal
@@ -104,10 +102,20 @@ struct PhotoDisplayView: View {
                             .scaleEffect(1.25)
                             .foregroundColor(.black)
                     }
-                    // TODO: 데이터에서 좋아요 여부를 확인할 수 있어야 함.
-//                    Like(isLiked: viewModel.photos[selection]) {
-//                        // TODO: 전시물 좋아요 API 호출
-//                    }
+
+                    if viewModel.photos.count > selection {
+                        Like(isLiked: .constant(viewModel.photos[selection].isLiked)) {
+                            if viewModel.photos[selection].isLiked {
+                                // TODO: 전시물 좋아요 해제 API 호출
+                            } else {
+                                likePhoto(viewModel.photos[selection].photoData.photoId) {
+                                    withAnimation {
+                                        viewModel.photos[selection].isLiked.toggle()
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -116,7 +124,7 @@ struct PhotoDisplayView: View {
 }
 
 struct PhotoPageView: View {
-    @Binding var photo: Image
+    var photo: Image
 
     var body: some View {
         photo

@@ -195,7 +195,7 @@ func likeExhibition(_ exhibitionId: Int, completion: @escaping () -> Void) {
         method: .post
     ).response { response in
         guard let statusCode = response.response?.statusCode, statusCode == 200 else {
-            debugPrint(response.response?.statusCode)
+            debugPrint(String(describing: response.response?.statusCode))
             return
         }
         completion()
@@ -208,7 +208,20 @@ func dislikeExhibition(_ exhibitionId: Int, completion: @escaping () -> Void) {
         method: .delete
     ).response { response in
         guard let statusCode = response.response?.statusCode, statusCode == 200 else {
-            debugPrint(response.response?.statusCode)
+            debugPrint(String(describing: response.response?.statusCode))
+            return
+        }
+        completion()
+    }
+}
+
+func likePhoto(_ photoId: Int, completion: @escaping () -> Void) {
+    AF.request(
+        Request.baseURL + "/photo/like/\(User.shared.userId)/\(photoId)",
+        method: .post
+    ).response { response in
+        guard let statusCode = response.response?.statusCode, statusCode == 200 else {
+            debugPrint(String(describing: response.response?.statusCode))
             return
         }
         completion()
