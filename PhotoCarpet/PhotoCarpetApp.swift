@@ -11,12 +11,9 @@ import SwiftUI
 
 @main
 struct PhotoCarpetApp: App {
-    @StateObject private var exhibitionData = ExhibitionData()
-
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(exhibitionData)
         }
     }
 }

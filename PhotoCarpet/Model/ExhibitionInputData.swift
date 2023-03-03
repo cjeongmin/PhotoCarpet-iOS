@@ -9,7 +9,7 @@ import Alamofire
 import Foundation
 import SwiftUI
 
-final class ExhibitionData: ObservableObject {
+final class ExhibitionInputData: ObservableObject {
     struct Photo {
         var data: UIImage?
         var photo: Image?
@@ -28,8 +28,6 @@ final class ExhibitionData: ObservableObject {
 
         var isLiked: Bool = false
     }
-    
-    var userId: Int? // User Id 있으면, 다른 사람의 전시회
     
     @Published var photo1: Photo = .init()
     @Published var photo2: Photo = .init()
@@ -69,28 +67,5 @@ final class ExhibitionData: ObservableObject {
                 photo3.photo != nil && !photo3.price.isEmpty &&
                 photo4.photo != nil && !photo4.price.isEmpty
         )
-    }
-    
-    func clear() {
-        photo1 = Photo()
-        photo2 = Photo()
-        photo3 = Photo()
-        photo4 = Photo()
-        title = ""
-        description = ""
-        rawHashTags = ""
-        date = Date()
-    }
-    
-    func setDummyData() {
-        userId = 1
-        photo1 = Photo(photo: Image("example"), price: "1000", isLiked: true)
-        photo2 = Photo(photo: Image("example"), price: "2000", isLiked: false)
-        photo3 = Photo(photo: Image("example"), price: "3000", isLiked: false)
-        photo4 = Photo(photo: Image("example"), price: "4000", isLiked: true)
-        title = "테스트"
-        description = "테스트용 더미 데이터입니다."
-        rawHashTags = "#테스트 #태그1 #태그2 #iOS"
-        date = Date()
     }
 }

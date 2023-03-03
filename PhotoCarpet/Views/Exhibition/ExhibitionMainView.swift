@@ -18,9 +18,8 @@ final class PhotoDisplayViewModel: ObservableObject {
             self.photos = result
 
             var alt: [Image] = []
+            let semaphore = DispatchSemaphore(value: 0)
             for photo in self.photos {
-                let semaphore = DispatchSemaphore(value: 0)
-
                 if let url = URL(string: photo.artUrl) {
                     let task = URLSession.shared.dataTask(with: url) { data, response, error in
                         if let data = try? Data(contentsOf: url) {
@@ -30,10 +29,8 @@ final class PhotoDisplayViewModel: ObservableObject {
                         }
                         semaphore.signal()
                     }
-
                     task.resume()
                 }
-
                 semaphore.wait()
             }
             self.photoData = alt
@@ -42,11 +39,11 @@ final class PhotoDisplayViewModel: ObservableObject {
 }
 
 struct ExhibitionMainView: View {
+    @ObservedObject var photoDisplayViewModel = PhotoDisplayViewModel()
     @Environment(\.dismiss) var dismissAction
+    @State private var exhibitionInputData: ExhibitionInputData = .init()
     @State private var showDetail: Bool = false
     @State private var isLiked: Bool = false
-
-    @ObservedObject var photoDisplayViewModel = PhotoDisplayViewModel()
 
     var exhibition: Response.Exhibition
     init(_ exhibition: Response.Exhibition) {
@@ -153,13 +150,52 @@ struct ExhibitionMainView: View {
             if exhibition.user?.nickName == User.shared.nickName {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink {
-                        EnrollView(isEdit: .constant(true))
+                        EnrollView(isEdit: true)
+                            .environmentObject(exhibitionInputData)
                     } label: {
                         Image(systemName: "square.and.pencil")
                             .foregroundColor(.black)
                             .scaleEffect(1.5)
                             .padding(.trailing)
                     }
+                    .simultaneousGesture(TapGesture().onEnded {
+                        requestPhotos(exhibition.exhibitId) { (response: [Int: (Response.Photo, UIImage)]) in
+                            DispatchQueue.main.async {
+                                exhibitionInputData.responseExhibition = exhibition
+                                exhibitionInputData.title = exhibition.title ?? ""
+                                exhibitionInputData.description = exhibition.content ?? ""
+                                exhibitionInputData.rawHashTags = exhibition.moodContents?.reduce("") {
+                                    $0 + $1 + " "
+                                } ?? ""
+                                exhibitionInputData.date = exhibition.exhibitionDate ?? Date()
+
+                                exhibitionInputData.photo1 = ExhibitionInputData.Photo(
+                                    data: response[0]?.1,
+                                    photo: Image(uiImage: response[0]?.1 ?? UIImage()),
+                                    price: String(response[0]?.0.price ?? 0),
+                                    isLiked: false
+                                )
+                                exhibitionInputData.photo2 = ExhibitionInputData.Photo(
+                                    data: response[1]?.1,
+                                    photo: Image(uiImage: response[1]?.1 ?? UIImage()),
+                                    price: String(response[1]?.0.price ?? 0),
+                                    isLiked: false
+                                )
+                                exhibitionInputData.photo3 = ExhibitionInputData.Photo(
+                                    data: response[2]?.1,
+                                    photo: Image(uiImage: response[2]?.1 ?? UIImage()),
+                                    price: String(response[2]?.0.price ?? 0),
+                                    isLiked: false
+                                )
+                                exhibitionInputData.photo4 = ExhibitionInputData.Photo(
+                                    data: response[3]?.1,
+                                    photo: Image(uiImage: response[3]?.1 ?? UIImage()),
+                                    price: String(response[3]?.0.price ?? 0),
+                                    isLiked: false
+                                )
+                            }
+                        }
+                    })
                 }
             } else {
                 ToolbarItem(placement: .navigationBarTrailing) {

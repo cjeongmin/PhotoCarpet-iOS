@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ImageSelector: View {
     @State private var selectedItem: PhotosPickerItem?
-    @Binding var photo: ExhibitionData.Photo
+    @Binding var photo: ExhibitionInputData.Photo
 
     var body: some View {
         ZStack {
@@ -59,11 +59,5 @@ struct ImageSelector: View {
             }
             .frame(width: 94)
         }
-    }
-}
-
-struct ImageSelector_Previews: PreviewProvider {
-    static var previews: some View {
-        ImageSelector(photo: .constant(ExhibitionData.Photo()))
     }
 }

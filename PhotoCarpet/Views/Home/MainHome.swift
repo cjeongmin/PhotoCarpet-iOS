@@ -22,7 +22,8 @@ struct MainHome: View {
                         .listRowInsets(EdgeInsets())
 
                     NavigationLink {
-                        EnrollView(isEdit: .constant(false))
+                        EnrollView(isEdit: false)
+                            .environmentObject(ExhibitionInputData())
                     } label: {
                         Image(systemName: "plus.circle.fill")
                             .resizable()
@@ -39,13 +40,6 @@ struct MainHome: View {
             .background(Gradient(colors: [.black, .white]))
         } // NavView
         .navigationViewStyle(.stack)
-    }
-}
-
-struct MainHome_Previews: PreviewProvider {
-    static var previews: some View {
-        MainHome()
-            .environmentObject(ExhibitionData())
     }
 }
 

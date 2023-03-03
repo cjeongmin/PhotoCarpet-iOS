@@ -115,9 +115,7 @@ struct PhotoDisplayView: View {
     }
 }
 
-// TODO: 사진 업로드 추가 (exhibitionId 필요, 개선되면)
 // TODO: 수정 기능 추가
-// TODO: 전시물, 전시회 좋아요 API 추가
 // TODO: 전시회 태그 받아와지는지 확인
 
 struct PhotoPageView: View {
@@ -136,9 +134,5 @@ struct PhotoPageView: View {
 struct PhotoDisplayView_Previews: PreviewProvider {
     static var previews: some View {
         EmptyView()
-//        let data = ExhibitionData()
-//        data.setDummyData()
-//        return PhotoDisplayView()
-//            .environmentObject(data)
     }
 }

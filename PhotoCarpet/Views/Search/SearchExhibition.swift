@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct SearchExhibition: View {
-    @EnvironmentObject var exhibitionData: ExhibitionData
     @State private var offset: Int = 0
     @State private var limit: Int = 9
 
@@ -20,9 +19,6 @@ struct SearchExhibition: View {
                 ForEach(0 ... (offset + 1) * 10, id: \.self) { index in
                     NavigationLink {
 //                        ExhibitionMainView()
-//                            .onAppear {
-//                                exhibitionData.setDummyData()
-//                            }
                     } label: {
 //                        ExhibitionItem()
 //                            .onAppear {
@@ -43,6 +39,5 @@ struct SearchExhibition: View {
 struct SearchExhibition_Previews: PreviewProvider {
     static var previews: some View {
         SearchExhibition()
-            .environmentObject(ExhibitionData())
     }
 }

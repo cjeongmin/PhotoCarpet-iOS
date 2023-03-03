@@ -42,6 +42,7 @@ struct ExhibitionDetailView: View {
                     }
                 }
             }
+
             HStack {
                 Circle()
                     .frame(width: 40, height: 40)

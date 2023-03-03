@@ -104,7 +104,6 @@ final class ExhibitionRowViewModel: ObservableObject {
 }
 
 struct ExhibitionRow: View {
-    @EnvironmentObject var exhibitionData: ExhibitionData
     @ObservedObject private var viewModel: ExhibitionRowViewModel = .init()
     var categoryName: String
 
@@ -141,6 +140,5 @@ struct ExhibitionRow: View {
 struct ExhibitionRow_Previews: PreviewProvider {
     static var previews: some View {
         ExhibitionRow(categoryName: "Trend")
-            .environmentObject(ExhibitionData())
     }
 }

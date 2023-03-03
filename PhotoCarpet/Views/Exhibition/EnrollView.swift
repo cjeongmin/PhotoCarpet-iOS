@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct EnrollView: View {
+    @EnvironmentObject var exhibitionInputData: ExhibitionInputData
     @Environment(\.dismiss) var dismissAction
-    @EnvironmentObject var exhibitionData: ExhibitionData
-    @Binding var isEdit: Bool
     @State var isActive: Bool = false
-    
+    var isEdit: Bool = false
+
     var body: some View {
         ZStack {
             Color.clear
@@ -25,39 +25,38 @@ struct EnrollView: View {
                         .font(.system(size: 14))
                 }
                 .padding(.top)
-                    
+
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 12) {
-                        ImageSelector(photo: $exhibitionData.photo1)
-                        ImageSelector(photo: $exhibitionData.photo2)
-                        ImageSelector(photo: $exhibitionData.photo3)
-                        ImageSelector(photo: $exhibitionData.photo4)
+                        ImageSelector(photo: $exhibitionInputData.photo1)
+                        ImageSelector(photo: $exhibitionInputData.photo2)
+                        ImageSelector(photo: $exhibitionInputData.photo3)
+                        ImageSelector(photo: $exhibitionInputData.photo4)
                     }
                 }
-                    
-                CustomTextField(title: "전시회 제목", placeholder: "전시회 제목을 입력해주세요", text: $exhibitionData.title)
-                    
-                CustomTextField(title: "간단한 설명", placeholder: "설명을 입력해주세요", text: $exhibitionData.description)
-                    
-                CustomTextField(title: "해시태그", placeholder: "#태그1 #태그2", text: $exhibitionData.rawHashTags)
-                    
+
+                CustomTextField(title: "전시회 제목", placeholder: "전시회 제목을 입력해주세요", text: $exhibitionInputData.title)
+
+                CustomTextField(title: "간단한 설명", placeholder: "설명을 입력해주세요", text: $exhibitionInputData.description)
+
+                CustomTextField(title: "해시태그", placeholder: "#태그1 #태그2", text: $exhibitionInputData.rawHashTags)
                 VStack(alignment: .leading) {
                     Text("전시회 마감일")
                     VStack {
-                        DatePicker("", selection: $exhibitionData.date)
+                        DatePicker("", selection: $exhibitionInputData.date)
                             .datePickerStyle(.compact)
                             .labelsHidden()
                     }
                 }.padding(.top)
-                    
+
                 Spacer()
                 Spacer()
                 Spacer()
-                    
-                if exhibitionData.isFillData {
-                    if !isEdit {
+
+                if exhibitionInputData.isFillData {
+                    if isEdit == false {
                         NavigationLink(isActive: $isActive) {
-                            if let response = exhibitionData.responseExhibition {
+                            if let response = exhibitionInputData.responseExhibition {
                                 ExhibitionMainView(response)
                             }
                         } label: {
@@ -65,48 +64,49 @@ struct EnrollView: View {
                         }
 
                         Button {
-                            exhibitionData.userId = User.shared.userId
                             createExhibition(
                                 Request.Exhibition(
-                                    title: exhibitionData.title,
-                                    content: exhibitionData.description,
-                                    exhibitionDate: exhibitionData.date,
+                                    title: exhibitionInputData.title,
+                                    content: exhibitionInputData.description,
+                                    exhibitionDate: exhibitionInputData.date,
                                     userId: User.shared.userId,
-                                    customMoods: exhibitionData.hashTags,
-                                    photo: exhibitionData.photo1.data!
+                                    customMoods: exhibitionInputData.hashTags,
+                                    photo: exhibitionInputData.photo1.data!
                                 )
                             ) { exhibition in
-                                exhibitionData.responseExhibition = exhibition
+                                guard let exhibition = exhibition else { return }
+
+                                exhibitionInputData.responseExhibition = exhibition
                                 uploadPhoto(
                                     Request.Photo(
                                         exhibitionId: exhibition.exhibitId,
                                         soldOut: false,
-                                        price: Int(exhibitionData.photo1.price)!,
-                                        photo: exhibitionData.photo1.data!
+                                        price: Int(exhibitionInputData.photo1.price)!,
+                                        photo: exhibitionInputData.photo1.data!
                                     )
                                 )
                                 uploadPhoto(
                                     Request.Photo(
                                         exhibitionId: exhibition.exhibitId,
                                         soldOut: false,
-                                        price: Int(exhibitionData.photo2.price)!,
-                                        photo: exhibitionData.photo2.data!
+                                        price: Int(exhibitionInputData.photo2.price)!,
+                                        photo: exhibitionInputData.photo2.data!
                                     )
                                 )
                                 uploadPhoto(
                                     Request.Photo(
                                         exhibitionId: exhibition.exhibitId,
                                         soldOut: false,
-                                        price: Int(exhibitionData.photo3.price)!,
-                                        photo: exhibitionData.photo3.data!
+                                        price: Int(exhibitionInputData.photo3.price)!,
+                                        photo: exhibitionInputData.photo3.data!
                                     )
                                 )
                                 uploadPhoto(
                                     Request.Photo(
                                         exhibitionId: exhibition.exhibitId,
                                         soldOut: false,
-                                        price: Int(exhibitionData.photo4.price)!,
-                                        photo: exhibitionData.photo4.data!
+                                        price: Int(exhibitionInputData.photo4.price)!,
+                                        photo: exhibitionInputData.photo4.data!
                                     )
                                 )
                                 isActive.toggle()
@@ -124,7 +124,44 @@ struct EnrollView: View {
                         }
                     } else {
                         Button {
-                            dismissAction.callAsFunction()
+                            createExhibition(
+                                method: .put,
+                                exhibitionId: exhibitionInputData.responseExhibition?.exhibitId,
+                                Request.Exhibition(
+                                    title: exhibitionInputData.title,
+                                    content: exhibitionInputData.description,
+                                    exhibitionDate: exhibitionInputData.date,
+                                    userId: User.shared.userId,
+                                    customMoods: exhibitionInputData.hashTags,
+                                    photo: exhibitionInputData.photo1.data!
+                                )
+                            ) { _ in
+                                uploadPhoto(method: .put, Request.Photo(
+                                    exhibitionId: exhibitionInputData.responseExhibition?.exhibitId ?? -1,
+                                    soldOut: false,
+                                    price: Int(exhibitionInputData.photo1.price)!,
+                                    photo: exhibitionInputData.photo1.data!
+                                ))
+                                uploadPhoto(method: .put, Request.Photo(
+                                    exhibitionId: exhibitionInputData.responseExhibition?.exhibitId ?? -1,
+                                    soldOut: false,
+                                    price: Int(exhibitionInputData.photo2.price)!,
+                                    photo: exhibitionInputData.photo2.data!
+                                ))
+                                uploadPhoto(method: .put, Request.Photo(
+                                    exhibitionId: exhibitionInputData.responseExhibition?.exhibitId ?? -1,
+                                    soldOut: false,
+                                    price: Int(exhibitionInputData.photo3.price)!,
+                                    photo: exhibitionInputData.photo3.data!
+                                ))
+                                uploadPhoto(method: .put, Request.Photo(
+                                    exhibitionId: exhibitionInputData.responseExhibition?.exhibitId ?? -1,
+                                    soldOut: false,
+                                    price: Int(exhibitionInputData.photo4.price)!,
+                                    photo: exhibitionInputData.photo4.data!
+                                ))
+                                NavigationUtil.popToRootView()
+                            }
                         } label: {
                             Text("전시회 수정하기")
                                 .frame(maxWidth: .infinity, alignment: .center)
@@ -154,21 +191,10 @@ struct EnrollView: View {
             ToolbarItemGroup(placement: .navigationBarLeading) {
                 BackButton {
                     dismissAction.callAsFunction()
-                    if !isEdit {
-                        exhibitionData.clear()
-                    }
                 }
             }
         }
         .navigationBarBackButtonHidden(true)
-    }
-}
-
-struct EnrollView_Previews: PreviewProvider {
-    static var previews: some View {
-        EnrollView(
-            isEdit: .constant(false)
-        ).environmentObject(ExhibitionData())
     }
 }
 
