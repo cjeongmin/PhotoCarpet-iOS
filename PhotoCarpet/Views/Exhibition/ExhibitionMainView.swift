@@ -216,8 +216,8 @@ struct ExhibitionMainView: View {
                     }
                     .padding(.trailing)
                     .onAppear {
-                        if exhibition.liked != nil {
-                            isLiked = true
+                        if let liked = exhibition.liked {
+                            isLiked = liked
                         }
                     }
                 }

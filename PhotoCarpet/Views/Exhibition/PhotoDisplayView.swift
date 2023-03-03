@@ -104,8 +104,8 @@ struct PhotoDisplayView: View {
                             .scaleEffect(1.25)
                             .foregroundColor(.black)
                     }
-//                    // TODO: 데이터에 좋아요 여부를 확인할 수 있어야 함.
-//                    Like(isLiked: photoData[selection].) {
+                    // TODO: 데이터에서 좋아요 여부를 확인할 수 있어야 함.
+//                    Like(isLiked: viewModel.photos[selection]) {
 //                        // TODO: 전시물 좋아요 API 호출
 //                    }
                 }
