@@ -1,11 +1,11 @@
 # PhotoCarpet-iOS
 
-<image src="image-1.png" alt="홈" width=200>
-<image src="image.png" alt="전시회 표지 사진" width=200>
-<image src="image-2.png" alt="전시회 사진" width=200>
-<image src="image-3.png" alt="전시회 리스트" width=200>
-<image src="image-4.png" alt="큐레이터 검색" width=200>
-<image src="image-5.png" alt="전시회 검색" width=200>
+<image src="static/image-1.png" alt="홈" width=200>
+<image src="static/image.png" alt="전시회 표지 사진" width=200>
+<image src="static/image-2.png" alt="전시회 사진" width=200>
+<image src="static/image-3.png" alt="전시회 리스트" width=200>
+<image src="static/image-4.png" alt="큐레이터 검색" width=200>
+<image src="static/image-5.png" alt="전시회 검색" width=200>
 
 <details>
   <summary>iOS 코딩 컨벤션 [접기/펼치기]</summary>
